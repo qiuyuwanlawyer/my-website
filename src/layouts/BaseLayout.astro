@@ -1,0 +1,46 @@
+---
+import "../styles/global.css";
+
+const {
+  title = "邱煜完律师 | 个人网站",
+  description = "邱煜完律师的个人网站，分享法律服务、实务观察与联系方式。"
+} = Astro.props;
+
+const navItems = [
+  { href: "/", label: "首页" },
+  { href: "/about", label: "关于我" },
+  { href: "/products", label: "产品" }
+];
+---
+
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="返回首页">
+        <span class="brand-mark">Q</span>
+        <span>邱煜完</span>
+      </a>
+      <nav class="site-nav" aria-label="主导航">
+        {navItems.map((item) => (
+          <a href={item.href}>{item.label}</a>
+        ))}
+      </nav>
+    </header>
+
+    <main>
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <p>© {new Date().getFullYear()} 邱煜完律师. All rights reserved.</p>
+    </footer>
+  </body>
+</html>
