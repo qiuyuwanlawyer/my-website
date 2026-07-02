@@ -1,0 +1,18 @@
+<svg viewBox="0 0 520 140" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">邱煜完律师团队推荐横向 Logo</title>
+  <desc id="desc">A recommended horizontal logo lockup for Qiu Yuwan Legal Team using the Qiu Gate symbol.</desc>
+  <rect width="520" height="140" fill="#171615"/>
+  <g transform="translate(34 24)" color="#c7a455">
+    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M24 84V12h72v72" stroke-width="6"/>
+      <path d="M24 38h72" stroke-width="5.2"/>
+      <path d="M46.5 12v72" stroke-width="5.2"/>
+      <path d="M73.5 12v72" stroke-width="5.2"/>
+      <circle cx="60" cy="60.5" r="8.2" fill="currentColor" stroke="none"/>
+    </g>
+  </g>
+  <g fill="#f7f3eb">
+    <text x="152" y="61" font-family="PingFang SC, Noto Sans CJK SC, Microsoft YaHei, sans-serif" font-size="34" font-weight="520">邱煜完律师团队</text>
+    <text x="154" y="94" font-family="Avenir Next, Inter, Arial, sans-serif" font-size="13" letter-spacing="3" fill="#b8b0a3">QIU YUWAN LEGAL TEAM</text>
+  </g>
+</svg>

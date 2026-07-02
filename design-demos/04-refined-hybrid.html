@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>方向四 · 深色律政品牌融合版</title>
+    <style>
+      :root {
+        --navy: #090622;
+        --navy-2: #110d31;
+        --ink: #151922;
+        --muted: #6b7280;
+        --paper: #f4f1eb;
+        --paper-2: #e8e0d2;
+        --line: rgba(21, 25, 34, 0.14);
+        --gold: #c29a4b;
+        --blue: #125c8a;
+        --cyan: #58b7d8;
+        --red: #c64f45;
+        --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+        --serif: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--sans);
+        background: var(--paper);
+      }
+
+      a { color: inherit; text-decoration: none; }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        background: var(--navy);
+        color: #fff;
+      }
+
+      .nav-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: min(1180px, calc(100% - 56px));
+        min-height: 82px;
+        margin: 0 auto;
+      }
+
+      .brand {
+        display: grid;
+        gap: 4px;
+      }
+
+      .brand strong {
+        font-size: 23px;
+        letter-spacing: 0.14em;
+        font-weight: 900;
+      }
+
+      .brand span {
+        color: rgba(255, 255, 255, 0.7);
+        font-size: 11px;
+        letter-spacing: 0.34em;
+        text-transform: uppercase;
+      }
+
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 42px;
+        color: rgba(255, 255, 255, 0.86);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .hero {
+        position: relative;
+        min-height: calc(100vh - 82px);
+        overflow: hidden;
+        color: #fff;
+        background:
+          linear-gradient(90deg, rgba(9, 6, 34, 1) 0%, rgba(9, 6, 34, 0.94) 46%, rgba(9, 6, 34, 0.58) 72%, rgba(9, 6, 34, 0.25) 100%),
+          radial-gradient(circle at 76% 42%, rgba(88, 183, 216, 0.2), transparent 28%),
+          var(--navy-2);
+      }
+
+      .fold-art {
+        position: absolute;
+        top: 56px;
+        right: max(0px, calc((100vw - 1240px) / 2));
+        width: min(640px, 50vw);
+        height: min(650px, 74vh);
+        pointer-events: none;
+      }
+
+      .fold {
+        position: absolute;
+        box-shadow: 0 28px 46px rgba(0, 0, 0, 0.28);
+        transform: skewY(-10deg);
+      }
+
+      .fold.large {
+        inset: 84px 74px 0 0;
+        background:
+          linear-gradient(135deg, rgba(255, 218, 90, 0.95), rgba(179, 115, 22, 0.82) 38%, rgba(8, 42, 71, 0.94) 39%, rgba(25, 132, 180, 0.92));
+      }
+
+      .fold.mid {
+        top: 0;
+        right: 0;
+        width: 38%;
+        height: 48%;
+        background: linear-gradient(135deg, #dbeaf0, #1f5b86 42%, #0b2a4a);
+      }
+
+      .fold.small {
+        right: 0;
+        bottom: 0;
+        width: 36%;
+        height: 34%;
+        background: linear-gradient(135deg, #f3bd4b, #c64f45 44%, #1d76a3);
+      }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        align-items: end;
+        min-height: calc(100vh - 82px);
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto;
+        padding: 86px 0 102px;
+      }
+
+      .eyebrow {
+        margin: 0 0 24px;
+        color: var(--gold);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.28em;
+      }
+
+      h1 {
+        max-width: 680px;
+        margin: 0;
+        font-size: clamp(48px, 6.6vw, 92px);
+        line-height: 1.08;
+        letter-spacing: 0;
+        font-weight: 900;
+      }
+
+      .lead {
+        max-width: 720px;
+        margin: 28px 0 0;
+        color: rgba(255, 255, 255, 0.74);
+        font-size: clamp(17px, 1.6vw, 20px);
+        line-height: 1.9;
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        margin-top: 42px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0 23px;
+        border: 1px solid rgba(255, 255, 255, 0.24);
+        color: #fff;
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .btn.primary {
+        border-color: var(--gold);
+        color: #0b0a18;
+        background: var(--gold);
+      }
+
+      .contact-slip {
+        position: absolute;
+        right: max(28px, calc((100vw - 1180px) / 2));
+        bottom: 28px;
+        z-index: 4;
+        display: grid;
+        grid-template-columns: 78px 1fr;
+        gap: 14px;
+        align-items: center;
+        width: 278px;
+        padding: 10px 12px;
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        background: rgba(244, 241, 235, 0.94);
+        color: var(--ink);
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+      }
+
+      .contact-slip img {
+        width: 78px;
+        height: 78px;
+        object-fit: cover;
+        object-position: center 52%;
+        border: 1px solid rgba(21, 25, 34, 0.14);
+        background: white;
+      }
+
+      .contact-slip strong {
+        display: block;
+        margin-bottom: 4px;
+        color: var(--navy);
+        font-size: 14px;
+      }
+
+      .contact-slip span {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .news-section {
+        background: var(--paper);
+        padding: 84px 0 92px;
+      }
+
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto 34px;
+      }
+
+      .section-head small {
+        display: block;
+        margin-bottom: 10px;
+        color: var(--gold);
+        font-weight: 900;
+        letter-spacing: 0.26em;
+      }
+
+      .section-head h2 {
+        margin: 0;
+        color: var(--navy);
+        font-family: var(--serif);
+        font-size: clamp(32px, 4vw, 54px);
+        line-height: 1.12;
+      }
+
+      .section-head a {
+        color: var(--navy);
+        font-weight: 900;
+      }
+
+      .news-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 1fr;
+        gap: 52px;
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto;
+      }
+
+      .feature-card {
+        position: relative;
+        min-height: 530px;
+        display: flex;
+        align-items: end;
+        padding: 42px;
+        overflow: hidden;
+        color: #fff;
+        background: #0f3150;
+      }
+
+      .feature-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(135deg, rgba(255, 211, 52, 0.98) 0 22%, rgba(178, 104, 16, 0.86) 23% 34%, transparent 35%),
+          linear-gradient(150deg, transparent 0 36%, rgba(4, 20, 41, 0.55) 37% 48%, rgba(55, 178, 221, 0.88) 49%),
+          radial-gradient(circle at 24% 72%, rgba(70, 174, 216, 0.9), rgba(11, 47, 80, 0.95) 42%, rgba(5, 15, 33, 1));
+      }
+
+      .feature-card .content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .date {
+        color: rgba(255, 255, 255, 0.74);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.1em;
+      }
+
+      .feature-card h3 {
+        max-width: 500px;
+        margin: 22px 0 28px;
+        font-size: clamp(26px, 3vw, 38px);
+        line-height: 1.28;
+      }
+
+      .arrow {
+        font-size: 30px;
+        letter-spacing: 0;
+      }
+
+      .article-list {
+        display: grid;
+        gap: 26px;
+      }
+
+      .article {
+        display: grid;
+        grid-template-columns: 210px 1fr;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .thumb {
+        aspect-ratio: 1;
+        background: linear-gradient(135deg, #dcebf0, #245e88 45%, #081d36);
+        box-shadow: 0 16px 32px rgba(21, 25, 34, 0.12);
+      }
+
+      .article:nth-child(2) .thumb {
+        background: linear-gradient(135deg, #f3bd4b, #c64f45 45%, #1674a4);
+      }
+
+      .article:nth-child(3) .thumb {
+        background: linear-gradient(135deg, #ece3d2, #c29a4b 38%, #0e1231 39%, #1f5b86);
+      }
+
+      .article small {
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+      }
+
+      .article h3 {
+        margin: 20px 0 24px;
+        color: #4a4f5b;
+        font-size: 22px;
+        line-height: 1.45;
+      }
+
+      .article a {
+        color: var(--navy);
+        font-size: 22px;
+      }
+
+      .service-band {
+        background: #fff;
+        border-top: 1px solid var(--line);
+      }
+
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto;
+        border-left: 1px solid var(--line);
+      }
+
+      .service {
+        min-height: 210px;
+        padding: 34px 26px;
+        border-right: 1px solid var(--line);
+      }
+
+      .service em {
+        color: var(--gold);
+        font-style: normal;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.18em;
+      }
+
+      .service h3 {
+        margin: 26px 0 14px;
+        color: var(--navy);
+        font-size: 23px;
+      }
+
+      .service p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.75;
+      }
+
+      @media (max-width: 980px) {
+        nav { display: none; }
+        .fold-art { opacity: 0.38; width: 90vw; }
+        .contact-slip {
+          position: relative;
+          right: auto;
+          bottom: auto;
+          margin: -80px 28px 36px auto;
+        }
+        .news-grid { grid-template-columns: 1fr; }
+        .article { grid-template-columns: 120px 1fr; }
+        .service-grid { grid-template-columns: 1fr; }
+      }
+
+      @media (max-width: 640px) {
+        .nav-inner, .hero-inner, .section-head, .news-grid, .service-grid {
+          width: min(100% - 32px, 1180px);
+        }
+        .hero-inner { padding-top: 62px; }
+        .article { grid-template-columns: 1fr; }
+        .feature-card { min-height: 420px; padding: 28px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="nav-inner">
+        <a class="brand" href="#">
+          <strong>邱煜完律师</strong>
+          <span>QIU YUWAN LAWYER</span>
+        </a>
+        <nav aria-label="主导航">
+          <a href="#">首页</a>
+          <a href="#">关于我</a>
+          <a href="#">产品与服务</a>
+          <a href="#">平台文章</a>
+          <a href="#">联系</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="fold-art" aria-hidden="true">
+          <i class="fold large"></i>
+          <i class="fold mid"></i>
+          <i class="fold small"></i>
+        </div>
+        <div class="hero-inner">
+          <section>
+            <p class="eyebrow">企业经营风险 · 争议解决 · 税务合规 · AI 数据合规</p>
+            <h1>解决复杂法律问题，守住商业结果。</h1>
+            <p class="lead">
+              邱煜完律师专注于争议解决、税务合规、企业刑事风险处置与 AI 行业数据合规服务，致力于帮助客户商业利益最大化，法律风险最小化。
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="#">查看服务</a>
+              <a class="btn" href="#">阅读专业文章</a>
+            </div>
+          </section>
+        </div>
+        <aside class="contact-slip" aria-label="微信联系">
+          <img src="./assets/wechat-qr.png" alt="邱煜完律师微信二维码" />
+          <div>
+            <strong>微信咨询</strong>
+            <span>扫码添加，简要说明争议、税务或经营风险节点。</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="news-section">
+        <div class="section-head">
+          <div>
+            <small>INSIGHTS</small>
+            <h2>最新专业文章</h2>
+          </div>
+          <a href="#">查看更多文章 →</a>
+        </div>
+        <div class="news-grid">
+          <article class="feature-card">
+            <div class="content">
+              <span class="date">争议解决 / 占位文章</span>
+              <h3>复杂商事争议中，企业如何先稳住证据与谈判位置</h3>
+              <span class="arrow">→</span>
+            </div>
+          </article>
+          <div class="article-list">
+            <article class="article">
+              <div class="thumb"></div>
+              <div>
+                <small>税务合规 / 占位文章</small>
+                <h3>税务稽查启动前后，企业经营者应关注的关键动作</h3>
+                <a href="#">→</a>
+              </div>
+            </article>
+            <article class="article">
+              <div class="thumb"></div>
+              <div>
+                <small>刑事风险 / 占位文章</small>
+                <h3>企业高管面对经营刑事风险时，哪些问题不能拖</h3>
+                <a href="#">→</a>
+              </div>
+            </article>
+            <article class="article">
+              <div class="thumb"></div>
+              <div>
+                <small>AI 数据合规 / 占位文章</small>
+                <h3>AI 数据服务中的合规边界，如何从业务流程里建立</h3>
+                <a href="#">→</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="service-band">
+        <div class="service-grid">
+          <article class="service"><em>01</em><h3>争议解决</h3><p>诉讼、仲裁、谈判、执行与复杂纠纷处理。</p></article>
+          <article class="service"><em>02</em><h3>税务合规</h3><p>税务稽查、税务争议、合规审查与涉税风险防控。</p></article>
+          <article class="service"><em>03</em><h3>企业刑事风险</h3><p>面向企业家、高管和企业经营活动的刑事风险处置。</p></article>
+          <article class="service"><em>04</em><h3>AI 数据合规</h3><p>AI 企业、数据产品、平台业务中的数据合规路径设计。</p></article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

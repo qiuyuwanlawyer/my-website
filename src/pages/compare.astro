@@ -1,0 +1,52 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="前后对比 | 产品与服务">
+  <section class="review-page">
+    <div class="review-head">
+      <div>
+        <p>Design Review</p>
+        <h1>产品与服务页前后对比</h1>
+        <span>左侧是当前版本，右侧是 Impeccable 审查后的轻量 polish 提案。提案只用于可视化审查，不会替换正式页面。</span>
+      </div>
+      <div class="review-links">
+        <a href="/products" target="_blank">打开当前版</a>
+        <a href="/products-polish" target="_blank">打开提案版</a>
+      </div>
+    </div>
+
+    <div class="review-notes">
+      <article>
+        <strong>当前版</strong>
+        <p>结构清楚，4 个服务已经是 2×2，但仍然偏“卡片矩阵”。英文小标签和表格让页面略有模板感。</p>
+      </article>
+      <article>
+        <strong>提案版</strong>
+        <p>保留原有信息，弱化卡片边界，增加服务承诺层级，减少重复英文标签，让它更像专业服务目录。</p>
+      </article>
+    </div>
+
+    <div class="review-grid">
+      <section class="review-panel">
+        <header>
+          <strong>Before</strong>
+          <span>当前产品与服务页</span>
+        </header>
+        <div class="review-frame">
+          <iframe src="/products" title="当前产品与服务页"></iframe>
+        </div>
+      </section>
+
+      <section class="review-panel">
+        <header>
+          <strong>After</strong>
+          <span>轻量优化提案</span>
+        </header>
+        <div class="review-frame">
+          <iframe src="/products-polish" title="产品与服务优化提案"></iframe>
+        </div>
+      </section>
+    </div>
+  </section>
+</BaseLayout>

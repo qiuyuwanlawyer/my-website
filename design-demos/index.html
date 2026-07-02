@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>邱煜完律师个人网站 · 三个视觉方向</title>
+    <style>
+      body {
+        margin: 0;
+        color: #151922;
+        font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+        background: #f3efe6;
+      }
+      header {
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 38px 0 26px;
+      }
+      h1 { margin: 0 0 10px; font-size: 34px; }
+      p { margin: 0; color: #667084; line-height: 1.7; }
+      .featured {
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto 22px;
+        border: 1px solid rgba(21, 25, 34, 0.18);
+        background: white;
+      }
+      .featured .meta {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .featured .viewport {
+        height: 420px;
+      }
+      .featured iframe {
+        transform: scale(0.47);
+      }
+      .featured.secondary {
+        margin-bottom: 22px;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        width: min(1180px, calc(100% - 48px));
+        margin: 0 auto 56px;
+      }
+      .card {
+        overflow: hidden;
+        border: 1px solid rgba(21, 25, 34, 0.18);
+        background: white;
+      }
+      .meta {
+        padding: 18px;
+        border-bottom: 1px solid rgba(21, 25, 34, 0.14);
+      }
+      .meta strong { display: block; margin-bottom: 8px; font-size: 18px; }
+      .meta span { color: #667084; font-size: 13px; line-height: 1.6; }
+      iframe {
+        display: block;
+        width: 1440px;
+        height: 900px;
+        border: 0;
+        transform: scale(0.255);
+        transform-origin: top left;
+      }
+      .viewport {
+        height: 230px;
+        background: #ddd;
+      }
+      a {
+        display: inline-flex;
+        margin-top: 14px;
+        color: #102a4a;
+        font-weight: 800;
+        text-decoration: none;
+      }
+      @media (max-width: 900px) {
+        .grid { grid-template-columns: 1fr; }
+        .viewport { height: 360px; }
+        iframe { transform: scale(0.4); }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>邱煜完律师个人网站 · 三个视觉方向</h1>
+      <p>同一套内容，只比较首页气质与视觉系统。选定方向后，再展开完整 4 页 Astro 站点。</p>
+    </header>
+    <section class="featured">
+      <div class="meta">
+        <div>
+          <strong>推荐优化版 · 深色律政品牌融合版</strong>
+          <span>融合方向一和方向二：突出“邱煜完律师”，保留深色高级感，弱化科技模板感；二维码变成低打扰联系角标。</span>
+        </div>
+        <a href="./04-refined-hybrid.html">打开完整预览</a>
+      </div>
+      <div class="viewport"><iframe src="./04-refined-hybrid.html"></iframe></div>
+    </section>
+    <section class="featured secondary">
+      <div class="meta">
+        <div>
+          <strong>新版 · Impeccable 优化版</strong>
+          <span>回到第一版的冲击力，但去掉科技模板感；原创文件折面视觉，裁切二维码主体并融入联系角标。</span>
+        </div>
+        <a href="./05-impeccable-refined.html">打开完整预览</a>
+      </div>
+      <div class="viewport"><iframe src="./05-impeccable-refined.html"></iframe></div>
+    </section>
+    <section class="featured secondary">
+      <div class="meta">
+        <div>
+          <strong>新版 · 深蓝毛玻璃个人品牌版</strong>
+          <span>参考德禾翰通的水墨深蓝氛围，加入 Apple 式毛玻璃、个人形象照位置，并让二维码作为玻璃信息组件融入首页。</span>
+        </div>
+        <a href="./06-glass-portrait-hero.html">打开完整预览</a>
+      </div>
+      <div class="viewport"><iframe src="./06-glass-portrait-hero.html"></iframe></div>
+    </section>
+    <section class="featured secondary">
+      <div class="meta">
+        <div>
+          <strong>新版 · 海洋浅蓝个人品牌版</strong>
+          <span>改用海洋浅蓝渐变与细水纹质感，左右非均分，标题按屏幕宽度自适应，并直接放入形象照。</span>
+        </div>
+        <a href="./07-ocean-portrait.html">打开完整预览</a>
+      </div>
+      <div class="viewport"><iframe src="./07-ocean-portrait.html"></iframe></div>
+    </section>
+    <main class="grid">
+      <article class="card">
+        <div class="meta">
+          <strong>方向一 · 精品律所深色质感</strong>
+          <span>参考迁移：方达式深色首屏、建筑光影、律所级稳重感。</span>
+          <a href="./01-fangda-reference.html">打开完整预览</a>
+        </div>
+        <div class="viewport"><iframe src="./01-fangda-reference.html"></iframe></div>
+      </article>
+      <article class="card">
+        <div class="meta">
+          <strong>方向二 · 高端个人顾问品牌</strong>
+          <span>最佳设计师逻辑：更突出“邱煜完律师”本人，米色纸感、衬线标题、私人顾问感。</span>
+          <a href="./02-personal-advisor.html">打开完整预览</a>
+        </div>
+        <div class="viewport"><iframe src="./02-personal-advisor.html"></iframe></div>
+      </article>
+      <article class="card">
+        <div class="meta">
+          <strong>方向三 · 企业风险情报系统</strong>
+          <span>秒数轮盘：抽到 Functional Brutalism，改造成企业风险桌面和高密度服务索引。</span>
+          <a href="./03-risk-intelligence.html">打开完整预览</a>
+        </div>
+        <div class="viewport"><iframe src="./03-risk-intelligence.html"></iframe></div>
+      </article>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Qiu Lawyer Team Logo - Qiu Gate</title>
+  <desc id="desc">A geometric gate mark inspired by the structure of the Chinese surname Qiu and law-firm authority.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M26 74V26h48v48" stroke-width="4"/>
+    <path d="M26 43h48" stroke-width="3.5"/>
+    <path d="M41 26v48" stroke-width="3.5"/>
+    <path d="M59 26v48" stroke-width="3.5"/>
+    <circle cx="50" cy="58" r="5.5" fill="currentColor" stroke="none"/>
+  </g>
+</svg>

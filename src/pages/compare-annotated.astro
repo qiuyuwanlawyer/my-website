@@ -1,0 +1,145 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const beforeServices = [
+  {
+    no: "01",
+    title: "争议解决专项",
+    line1: "适用场景：合同纠纷、股东争议、重大交易争议、执行压力",
+    line2: "交付内容：争议路径评估、证据清单、谈判方案、诉讼/仲裁策略"
+  },
+  {
+    no: "02",
+    title: "税务合规与税务争议",
+    line1: "适用场景：税务稽查、发票风险、历史税务问题、交易税负安排",
+    line2: "交付内容：风险诊断、材料准备、沟通策略、整改建议"
+  }
+];
+
+const afterServices = [
+  {
+    no: "01",
+    title: "争议解决专项",
+    promise: "把纠纷从情绪和压力中拆出来，先稳住证据、谈判位置和诉讼节奏。",
+    scene: "合同纠纷、股东争议、重大交易争议、执行压力",
+    output: "争议路径评估、证据清单、谈判方案、诉讼/仲裁策略"
+  },
+  {
+    no: "02",
+    title: "税务合规与税务争议",
+    promise: "在稽查、补税、发票和历史税务问题中，先判断风险层级，再安排沟通与整改。",
+    scene: "税务稽查、发票风险、历史税务问题、交易税负安排",
+    output: "风险诊断、材料准备、沟通策略、整改建议"
+  }
+];
+---
+
+<BaseLayout title="标注版对比 | 产品与服务">
+  <section class="annotated">
+    <div class="annotated-head">
+      <p>Marked Comparison</p>
+      <h1>这版到底改了哪里</h1>
+      <span>把变化点直接标出来。左侧是当前版，右侧是优化提案版。</span>
+      <a href="/compare">返回普通对比页</a>
+    </div>
+
+    <div class="change-map">
+      <article><b>1</b><strong>页面定位文案</strong><span>从“服务入口”改成“客户先判断问题归属”。</span></article>
+      <article><b>2</b><strong>小英文标签</strong><span>减少模板化的 SERVICES / COMPARE / CONTACT 重复。</span></article>
+      <article><b>3</b><strong>服务卡片结构</strong><span>增加一句“服务承诺”，先讲能解决什么，再讲场景和交付。</span></article>
+      <article><b>4</b><strong>视觉边界</strong><span>从硬卡片矩阵改成专业目录感，边框更轻，层级更清楚。</span></article>
+    </div>
+
+    <section class="marked-pair">
+      <div class="marked-shot before-shot">
+        <header>
+          <strong>Before 当前版</strong>
+          <span>变化前</span>
+        </header>
+        <div class="mini-hero">
+          <em>SERVICES</em>
+          <h2>产品与服务</h2>
+          <p>围绕企业经营风险，将争议解决、税务合规、刑事风险处置与 AI 数据合规拆成清晰的服务入口。</p>
+          <i class="pin pin-1">1</i>
+          <i class="pin pin-2">2</i>
+        </div>
+        <div class="mini-grid hard">
+          {beforeServices.map((service) => (
+            <article>
+              <span>{service.no}</span>
+              <h3>{service.title}</h3>
+              <p>{service.line1}</p>
+              <p>{service.line2}</p>
+            </article>
+          ))}
+          <i class="pin pin-3">3</i>
+          <i class="pin pin-4">4</i>
+        </div>
+      </div>
+
+      <div class="marked-shot after-shot">
+        <header>
+          <strong>After 提案版</strong>
+          <span>变化后</span>
+        </header>
+        <div class="mini-hero">
+          <em>企业经营风险法律服务</em>
+          <h2>产品与服务</h2>
+          <p>将争议解决、税务合规、企业刑事风险与 AI 数据合规拆成四个入口。客户先看见问题归属，再判断是否需要咨询。</p>
+          <i class="pin pin-1">1</i>
+          <i class="pin pin-2">2</i>
+        </div>
+        <div class="mini-grid soft">
+          {afterServices.map((service) => (
+            <article>
+              <div>
+                <span>{service.no}</span>
+                <h3>{service.title}</h3>
+              </div>
+              <p class="promise">{service.promise}</p>
+              <dl>
+                <dt>适用场景</dt>
+                <dd>{service.scene}</dd>
+                <dt>交付内容</dt>
+                <dd>{service.output}</dd>
+              </dl>
+            </article>
+          ))}
+          <i class="pin pin-3">3</i>
+          <i class="pin pin-4">4</i>
+        </div>
+      </div>
+    </section>
+
+    <section class="annotation-legend">
+      <article>
+        <b>1</b>
+        <div>
+          <strong>文案变化</strong>
+          <p>当前版更像介绍服务分类；提案版更明确地告诉客户：“先判断问题归属，再决定是否咨询”。</p>
+        </div>
+      </article>
+      <article>
+        <b>2</b>
+        <div>
+          <strong>标签变化</strong>
+          <p>当前版继续使用英文 kicker；提案版改成中文定位，减少模板感，更像律师个人品牌。</p>
+        </div>
+      </article>
+      <article>
+        <b>3</b>
+        <div>
+          <strong>内容层级变化</strong>
+          <p>提案版每个服务先加一句承诺，客户更容易理解“这个服务帮我解决什么”。</p>
+        </div>
+      </article>
+      <article>
+        <b>4</b>
+        <div>
+          <strong>排版变化</strong>
+          <p>当前版是平行卡片；提案版把标题、承诺、场景、交付拆开，边界更轻，专业感更强。</p>
+        </div>
+      </article>
+    </section>
+  </section>
+</BaseLayout>

@@ -1,0 +1,12 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">邱煜完律师团队公众号头像 - 浅色版</title>
+  <desc id="desc">A clear single-character Qiu logo for light website and WeChat avatar usage.</desc>
+  <rect width="100" height="100" rx="8" fill="#f7f3eb"/>
+  <rect x="8" y="8" width="84" height="84" rx="4" fill="none" stroke="#9b7a35" stroke-width="2.2"/>
+  <text x="50" y="70"
+        text-anchor="middle"
+        font-family="Songti SC, STSong, Noto Serif CJK SC, SimSun, serif"
+        font-size="65"
+        font-weight="800"
+        fill="#171615">邱</text>
+</svg>

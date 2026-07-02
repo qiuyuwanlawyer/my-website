@@ -1,0 +1,50 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const categories = ["全部", "争议解决", "税务合规", "刑事风险", "AI 数据合规", "经营风险"];
+const articles = [
+  ["争议解决", "复杂商事争议中，企业如何先稳住证据与谈判位置"],
+  ["税务合规", "税务稽查启动前后，企业经营者应关注的关键动作"],
+  ["刑事风险", "企业高管面对经营刑事风险时，哪些问题不能拖"],
+  ["AI 数据合规", "AI 数据服务中的合规边界，如何从业务流程里建立"],
+  ["经营风险", "企业家个人责任与公司责任之间的风险隔离"],
+  ["合同风控", "重大交易合同签署前，哪些条款应当重新审视"],
+  ["税务合规", "企业日常报销与发票管理中的高频风险点"],
+  ["争议解决", "从律师视角看商业谈判中的风险预案"],
+  ["公司治理", "股东矛盾进入僵局时，经营层如何降低连带风险"]
+];
+---
+
+<BaseLayout title="平台文章 | 邱煜完律师">
+  <section class="page-hero">
+    <p class="eyebrow">ARTICLES</p>
+    <h1>平台文章</h1>
+    <p>
+      这里将集中展示争议解决、税务合规、企业刑事风险与 AI 数据合规等方向的专业文章。当前为占位内容。
+    </p>
+  </section>
+
+  <section class="section article-tools">
+    <label class="search-box">
+      <span>搜索文章</span>
+      <input type="search" placeholder="输入关键词" />
+    </label>
+    <div class="filters" aria-label="文章分类">
+      {categories.map((category, index) => (
+        <button class={index === 0 ? "active" : ""}>{category}</button>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="article-list">
+      {articles.map(([category, title]) => (
+        <article class="article-row">
+          <p>{category} / 占位文章</p>
+          <h2>{title}</h2>
+          <span>阅读 →</span>
+        </article>
+      ))}
+    </div>
+  </section>
+</BaseLayout>

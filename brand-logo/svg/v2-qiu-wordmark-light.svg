@@ -1,0 +1,26 @@
+<svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">邱煜完律师团队网页横向 Logo - 浅色版</title>
+  <desc id="desc">A horizontal website logo lockup for light backgrounds with a clear Qiu character mark.</desc>
+  <rect width="760" height="180" fill="#f7f3eb"/>
+  <g transform="translate(42 32)">
+    <rect width="116" height="116" rx="8" fill="#171615"/>
+    <rect x="9" y="9" width="98" height="98" rx="4" fill="none" stroke="#c7a455" stroke-width="2.4"/>
+    <text x="58" y="82"
+          text-anchor="middle"
+          font-family="Songti SC, STSong, Noto Serif CJK SC, SimSun, serif"
+          font-size="74"
+          font-weight="800"
+          fill="#f7f3eb">邱</text>
+  </g>
+  <text x="190" y="82"
+        font-family="Songti SC, STSong, Noto Serif CJK SC, SimSun, serif"
+        font-size="43"
+        font-weight="800"
+        fill="#171615">邱煜完律师团队</text>
+  <line x1="192" y1="105" x2="606" y2="105" stroke="#9b7a35" stroke-width="2"/>
+  <text x="190" y="135"
+        font-family="Avenir Next, Inter, Arial, sans-serif"
+        font-size="14"
+        letter-spacing="3.6"
+        fill="#746d62">QIU YUWAN LEGAL TEAM</text>
+</svg>

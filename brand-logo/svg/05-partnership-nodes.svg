@@ -1,0 +1,18 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Qiu Lawyer Team Logo - Partnership Nodes</title>
+  <desc id="desc">A calm node network representing lawyers, clients, evidence, and strategy converging around one team.</desc>
+  <g fill="none" stroke="currentColor" stroke-linecap="round">
+    <path d="M29 67Q38 49 50 50" stroke-width="2.8"/>
+    <path d="M50 50Q63 45 72 29" stroke-width="2.8"/>
+    <path d="M50 50Q58 64 70 70" stroke-width="2.2" opacity=".58"/>
+    <path d="M29 67Q44 78 70 70" stroke-width="1.8" opacity=".45"/>
+    <path d="M34 32Q42 42 50 50" stroke-width="1.8" opacity=".45"/>
+  </g>
+  <g fill="currentColor">
+    <circle cx="50" cy="50" r="7"/>
+    <circle cx="29" cy="67" r="5"/>
+    <circle cx="72" cy="29" r="5"/>
+    <circle cx="70" cy="70" r="4"/>
+    <circle cx="34" cy="32" r="3.2" opacity=".55"/>
+  </g>
+</svg>

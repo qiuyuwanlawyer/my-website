@@ -1,0 +1,31 @@
+<svg viewBox="0 0 900 383" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">邱煜完律师团队公众号封面 Logo</title>
+  <desc id="desc">A WeChat cover-ready logo layout with a large Qiu character mark and legal team name.</desc>
+  <rect width="900" height="383" fill="#171615"/>
+  <rect x="30" y="30" width="840" height="323" fill="none" stroke="#2b2926" stroke-width="2"/>
+  <g transform="translate(72 72)">
+    <rect width="152" height="152" rx="8" fill="#171615" stroke="#c7a455" stroke-width="4"/>
+    <text x="76" y="109"
+          text-anchor="middle"
+          font-family="Songti SC, STSong, Noto Serif CJK SC, SimSun, serif"
+          font-size="98"
+          font-weight="800"
+          fill="#f7f3eb">邱</text>
+  </g>
+  <text x="270" y="154"
+        font-family="Songti SC, STSong, Noto Serif CJK SC, SimSun, serif"
+        font-size="58"
+        font-weight="800"
+        fill="#f7f3eb">邱煜完律师团队</text>
+  <line x1="274" y1="184" x2="760" y2="184" stroke="#c7a455" stroke-width="2"/>
+  <text x="274" y="226"
+        font-family="Avenir Next, Inter, Arial, sans-serif"
+        font-size="18"
+        letter-spacing="4.5"
+        fill="#b8b0a3">QIU YUWAN LEGAL TEAM</text>
+  <text x="274" y="276"
+        font-family="PingFang SC, Noto Sans CJK SC, Microsoft YaHei, sans-serif"
+        font-size="23"
+        letter-spacing="1.2"
+        fill="#d8d1c5">诉讼策略｜法律顾问｜商事争议</text>
+</svg>

@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>方向五 · Impeccable 优化版</title>
+    <style>
+      :root {
+        --night: #08051f;
+        --night-2: #120d33;
+        --paper: #f2eee6;
+        --paper-2: #e4dac9;
+        --ink: #151923;
+        --muted: #686f7c;
+        --gold: #c7a15a;
+        --blue: #0f5c8c;
+        --cyan: #4bb6d6;
+        --line-dark: rgba(255, 255, 255, 0.16);
+        --line: rgba(21, 25, 35, 0.14);
+        --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+        --serif: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--sans);
+        background: var(--paper);
+      }
+      a { color: inherit; text-decoration: none; }
+
+      .site-header {
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 20;
+        color: white;
+        background: rgba(8, 5, 31, 0.94);
+        backdrop-filter: blur(16px);
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: min(1180px, calc(100% - 56px));
+        min-height: 84px;
+        margin: 0 auto;
+      }
+
+      .brand {
+        display: grid;
+        gap: 5px;
+      }
+      .brand strong {
+        font-size: 23px;
+        font-weight: 900;
+        letter-spacing: 0.16em;
+      }
+      .brand span {
+        color: rgba(255, 255, 255, 0.64);
+        font-size: 10px;
+        letter-spacing: 0.36em;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 40px;
+        color: rgba(255, 255, 255, 0.84);
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .hero {
+        position: relative;
+        min-height: 100vh;
+        overflow: hidden;
+        color: white;
+        background:
+          linear-gradient(90deg, rgba(8, 5, 31, 1) 0%, rgba(8, 5, 31, 0.96) 47%, rgba(8, 5, 31, 0.62) 76%, rgba(8, 5, 31, 0.88) 100%),
+          radial-gradient(circle at 70% 36%, rgba(30, 123, 164, 0.28), transparent 34%),
+          var(--night);
+      }
+
+      .document-field {
+        position: absolute;
+        inset: 84px 0 0 auto;
+        width: min(720px, 54vw);
+        pointer-events: none;
+      }
+
+      .monolith {
+        position: absolute;
+        width: 27%;
+        height: 78%;
+        bottom: -7%;
+        background:
+          linear-gradient(96deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.02) 22%, transparent 56%),
+          linear-gradient(180deg, rgba(76, 169, 204, 0.28), rgba(9, 35, 65, 0.88));
+        border: 1px solid rgba(157, 217, 239, 0.22);
+        box-shadow: 0 40px 74px rgba(0, 0, 0, 0.34);
+        transform: skewY(-9deg);
+        overflow: hidden;
+      }
+
+      .monolith::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          repeating-linear-gradient(0deg, transparent 0 34px, rgba(255, 255, 255, 0.08) 35px 36px),
+          linear-gradient(135deg, transparent 0 54%, rgba(255, 255, 255, 0.16) 55%, transparent 56%);
+      }
+
+      .monolith::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 3px;
+        height: 100%;
+        background: linear-gradient(180deg, rgba(199, 161, 90, 0.86), rgba(199, 161, 90, 0.04));
+      }
+
+      .monolith.one {
+        right: 32%;
+        height: 64%;
+        bottom: 4%;
+        opacity: 0.72;
+      }
+
+      .monolith.two {
+        right: 18%;
+        height: 78%;
+        bottom: -4%;
+        background:
+          linear-gradient(96deg, rgba(255, 255, 255, 0.13), rgba(255, 255, 255, 0.03) 25%, transparent 58%),
+          linear-gradient(180deg, rgba(34, 128, 170, 0.34), rgba(5, 23, 50, 0.92));
+      }
+
+      .monolith.three {
+        right: 2%;
+        height: 92%;
+        bottom: -12%;
+        opacity: 0.92;
+        background:
+          linear-gradient(96deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.03) 24%, transparent 58%),
+          linear-gradient(180deg, rgba(65, 173, 210, 0.36), rgba(10, 38, 70, 0.96));
+      }
+
+      .gold-blade {
+        position: absolute;
+        right: 13%;
+        top: 10%;
+        width: 5px;
+        height: 78%;
+        background: linear-gradient(180deg, rgba(231, 191, 95, 0), rgba(231, 191, 95, 0.86) 24%, rgba(231, 191, 95, 0.08));
+        box-shadow: 0 0 34px rgba(199, 161, 90, 0.2);
+        transform: skewY(-9deg);
+      }
+
+      .coordinate {
+        position: absolute;
+        right: 2%;
+        top: 12%;
+        width: 460px;
+        height: 460px;
+        border: 1px solid rgba(255, 255, 255, 0.13);
+        transform: rotate(-10deg);
+      }
+      .coordinate::before,
+      .coordinate::after {
+        content: "";
+        position: absolute;
+        background: rgba(255, 255, 255, 0.13);
+      }
+      .coordinate::before { left: 50%; top: 0; bottom: 0; width: 1px; }
+      .coordinate::after { top: 50%; left: 0; right: 0; height: 1px; }
+
+      .hero-inner {
+        position: relative;
+        z-index: 2;
+        display: grid;
+        align-items: end;
+        min-height: 100vh;
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto;
+        padding: 150px 0 106px;
+      }
+
+      .kicker {
+        margin: 0 0 24px;
+        color: var(--gold);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.28em;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 760px;
+        font-size: clamp(54px, 7.2vw, 104px);
+        line-height: 1.06;
+        letter-spacing: 0;
+        font-weight: 900;
+      }
+
+      .lead {
+        max-width: 720px;
+        margin: 30px 0 0;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 19px;
+        line-height: 1.9;
+      }
+
+      .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px;
+        margin-top: 44px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 24px;
+        border: 1px solid var(--line-dark);
+        color: white;
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .btn.primary {
+        border-color: var(--gold);
+        color: #0b0a18;
+        background: var(--gold);
+      }
+
+      .qr-integrated {
+        position: absolute;
+        right: max(28px, calc((100vw - 1180px) / 2));
+        bottom: 30px;
+        z-index: 5;
+        display: grid;
+        grid-template-columns: 92px 1fr;
+        gap: 14px;
+        align-items: center;
+        width: 312px;
+        padding: 12px 14px;
+        color: white;
+        background:
+          linear-gradient(135deg, rgba(12, 16, 48, 0.92), rgba(13, 47, 78, 0.78));
+        border: 1px solid rgba(157, 217, 239, 0.24);
+        box-shadow: 0 22px 54px rgba(0, 0, 0, 0.28);
+        backdrop-filter: blur(14px);
+      }
+
+      .qr-box {
+        display: grid;
+        place-items: center;
+        width: 92px;
+        height: 92px;
+        background: #e5f1f8;
+        overflow: hidden;
+        border: 1px solid rgba(157, 217, 239, 0.32);
+      }
+
+      .qr-box img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        filter: contrast(1.05);
+      }
+
+      .qr-integrated strong {
+        display: block;
+        color: #f5f8fb;
+        font-size: 15px;
+        margin-bottom: 6px;
+      }
+
+      .qr-integrated span {
+        display: block;
+        color: rgba(255, 255, 255, 0.68);
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .services {
+        position: relative;
+        z-index: 4;
+        margin-top: -1px;
+        background: rgba(8, 5, 31, 0.92);
+        border-top: 1px solid var(--line-dark);
+      }
+
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto;
+        border-left: 1px solid var(--line-dark);
+      }
+
+      .service {
+        min-height: 172px;
+        padding: 30px 24px;
+        border-right: 1px solid var(--line-dark);
+        color: white;
+      }
+
+      .service em {
+        color: var(--gold);
+        font-style: normal;
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.18em;
+      }
+
+      .service h2 {
+        margin: 20px 0 10px;
+        font-size: 22px;
+      }
+
+      .service p {
+        margin: 0;
+        color: rgba(255, 255, 255, 0.64);
+        font-size: 14px;
+        line-height: 1.68;
+      }
+
+      .insights {
+        padding: 86px 0 96px;
+        background: var(--paper);
+      }
+
+      .section-title {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto 34px;
+      }
+
+      .section-title small {
+        display: block;
+        color: var(--gold);
+        font-weight: 900;
+        letter-spacing: 0.26em;
+        margin-bottom: 10px;
+      }
+
+      .section-title h2 {
+        margin: 0;
+        color: var(--night);
+        font-family: var(--serif);
+        font-size: clamp(34px, 4vw, 58px);
+        line-height: 1.12;
+      }
+
+      .section-title a {
+        color: var(--night);
+        font-weight: 900;
+      }
+
+      .insight-grid {
+        display: grid;
+        grid-template-columns: 1.05fr 1fr;
+        gap: 52px;
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto;
+      }
+
+      .feature {
+        display: grid;
+        align-items: end;
+        min-height: 500px;
+        padding: 40px;
+        color: white;
+        background:
+          linear-gradient(180deg, rgba(8, 5, 31, 0.05), rgba(8, 5, 31, 0.72)),
+          linear-gradient(135deg, #09213d, #0f5c8c 46%, #e4dac9 47%, #c7a15a 58%, #08051f 59%);
+      }
+
+      .feature small,
+      .article small {
+        color: rgba(255, 255, 255, 0.74);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+      }
+
+      .feature h3 {
+        max-width: 510px;
+        margin: 20px 0 26px;
+        font-size: clamp(26px, 3vw, 38px);
+        line-height: 1.28;
+      }
+
+      .article-list {
+        display: grid;
+        gap: 26px;
+      }
+
+      .article {
+        display: grid;
+        grid-template-columns: 178px 1fr;
+        gap: 28px;
+        align-items: center;
+      }
+
+      .article-visual {
+        aspect-ratio: 1;
+        border: 1px solid rgba(21, 25, 35, 0.12);
+        background:
+          linear-gradient(135deg, rgba(242, 238, 230, 0.85) 0 22%, transparent 23%),
+          linear-gradient(150deg, #0b2441 0 42%, #155d88 43% 68%, #c7a15a 69%);
+      }
+
+      .article:nth-child(2) .article-visual {
+        background:
+          linear-gradient(135deg, #e4dac9 0 16%, transparent 17%),
+          linear-gradient(150deg, #2a1026 0 42%, #9d463d 43% 68%, #0f5c8c 69%);
+      }
+
+      .article:nth-child(3) .article-visual {
+        background:
+          linear-gradient(135deg, #c7a15a 0 18%, transparent 19%),
+          linear-gradient(150deg, #08051f 0 44%, #173a5e 45% 71%, #e4dac9 72%);
+      }
+
+      .article small {
+        color: var(--muted);
+      }
+
+      .article h3 {
+        margin: 18px 0 20px;
+        color: #4b5360;
+        font-size: 21px;
+        line-height: 1.45;
+      }
+
+      .arrow { font-size: 26px; }
+
+      @media (max-width: 960px) {
+        .nav-links { display: none; }
+        .document-field { opacity: 0.45; width: 90vw; }
+        .qr-integrated {
+          position: relative;
+          right: auto;
+          bottom: auto;
+          margin: -118px 28px 36px auto;
+        }
+        .service-grid,
+        .insight-grid { grid-template-columns: 1fr; }
+        .service { border-bottom: 1px solid var(--line-dark); }
+      }
+
+      @media (max-width: 640px) {
+        .nav, .hero-inner, .service-grid, .section-title, .insight-grid {
+          width: min(100% - 32px, 1180px);
+        }
+        .hero-inner { padding-top: 132px; }
+        .qr-integrated { width: calc(100% - 56px); margin-right: 28px; }
+        .article { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="nav">
+        <a class="brand" href="#">
+          <strong>邱煜完律师</strong>
+          <span>QIU YUWAN LAWYER</span>
+        </a>
+        <nav class="nav-links" aria-label="主导航">
+          <a href="#">首页</a>
+          <a href="#">关于我</a>
+          <a href="#">产品与服务</a>
+          <a href="#">平台文章</a>
+          <a href="#">联系</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="document-field" aria-hidden="true">
+          <div class="coordinate"></div>
+          <i class="monolith one"></i>
+          <i class="monolith two"></i>
+          <i class="monolith three"></i>
+          <i class="gold-blade"></i>
+        </div>
+
+        <div class="hero-inner">
+          <section>
+            <p class="kicker">争议解决 · 税务合规 · 企业刑事风险 · AI 数据合规</p>
+            <h1>解决复杂法律问题，守住商业结果。</h1>
+            <p class="lead">
+              邱煜完律师专注于争议解决、税务合规、企业刑事风险处置与 AI 行业数据合规服务，致力于帮助客户商业利益最大化，法律风险最小化。
+            </p>
+            <div class="hero-actions">
+              <a class="btn primary" href="#">查看服务</a>
+              <a class="btn" href="#">阅读专业文章</a>
+            </div>
+          </section>
+        </div>
+
+        <aside class="qr-integrated" aria-label="微信咨询">
+          <div class="qr-box">
+            <img src="./assets/wechat-qr-navy.png" alt="邱煜完律师微信二维码" />
+          </div>
+          <div>
+            <strong>微信咨询</strong>
+            <span>扫码添加，简要说明争议、税务或经营风险节点。</span>
+          </div>
+        </aside>
+      </section>
+
+      <section class="services">
+        <div class="service-grid">
+          <article class="service"><em>01</em><h2>争议解决</h2><p>诉讼、仲裁、谈判、执行与复杂纠纷处理。</p></article>
+          <article class="service"><em>02</em><h2>税务合规</h2><p>税务稽查、税务争议、合规审查与涉税风险防控。</p></article>
+          <article class="service"><em>03</em><h2>企业刑事风险</h2><p>面向企业家、高管和企业经营活动的刑事风险处置。</p></article>
+          <article class="service"><em>04</em><h2>AI 数据合规</h2><p>AI 企业、数据产品、平台业务中的数据合规路径设计。</p></article>
+        </div>
+      </section>
+
+      <section class="insights">
+        <div class="section-title">
+          <div>
+            <small>INSIGHTS</small>
+            <h2>最新专业文章</h2>
+          </div>
+          <a href="#">查看更多文章 →</a>
+        </div>
+        <div class="insight-grid">
+          <article class="feature">
+            <div>
+              <small>争议解决 / 占位文章</small>
+              <h3>复杂商事争议中，企业如何先稳住证据与谈判位置</h3>
+              <span class="arrow">→</span>
+            </div>
+          </article>
+          <div class="article-list">
+            <article class="article">
+              <div class="article-visual"></div>
+              <div>
+                <small>税务合规 / 占位文章</small>
+                <h3>税务稽查启动前后，企业经营者应关注的关键动作</h3>
+                <span class="arrow">→</span>
+              </div>
+            </article>
+            <article class="article">
+              <div class="article-visual"></div>
+              <div>
+                <small>刑事风险 / 占位文章</small>
+                <h3>企业高管面对经营刑事风险时，哪些问题不能拖</h3>
+                <span class="arrow">→</span>
+              </div>
+            </article>
+            <article class="article">
+              <div class="article-visual"></div>
+              <div>
+                <small>AI 数据合规 / 占位文章</small>
+                <h3>AI 数据服务中的合规边界，如何从业务流程里建立</h3>
+                <span class="arrow">→</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>方向二 · 高端个人顾问品牌</title>
+    <style>
+      :root {
+        --paper: #f3ecdf;
+        --paper-deep: #e6dccb;
+        --ink: #162033;
+        --muted: #667084;
+        --gold: #ad8542;
+        --blue: #102a4a;
+        --line: rgba(22, 32, 51, 0.16);
+        --serif: "Songti SC", "STSong", "Noto Serif CJK SC", serif;
+        --sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--sans);
+        background: var(--paper);
+      }
+
+      .wrap {
+        min-height: 100vh;
+        background:
+          linear-gradient(90deg, rgba(243, 236, 223, 0.96), rgba(243, 236, 223, 0.72)),
+          repeating-linear-gradient(90deg, transparent 0 118px, rgba(22, 32, 51, 0.045) 119px 120px);
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: min(1160px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 30px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .brand {
+        color: var(--blue);
+        font-weight: 900;
+        letter-spacing: 0.12em;
+      }
+      nav {
+        display: flex;
+        gap: 30px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: 1fr 360px;
+        gap: 80px;
+        align-items: center;
+        width: min(1160px, calc(100% - 48px));
+        min-height: calc(100vh - 92px);
+        margin: 0 auto;
+        padding: 68px 0 90px;
+      }
+
+      .label {
+        display: inline-flex;
+        gap: 10px;
+        align-items: center;
+        margin-bottom: 34px;
+        color: var(--gold);
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.18em;
+      }
+      .label::before {
+        content: "";
+        width: 64px;
+        height: 1px;
+        background: var(--gold);
+      }
+
+      h1 {
+        margin: 0;
+        color: var(--blue);
+        font-family: var(--serif);
+        font-size: clamp(58px, 8vw, 112px);
+        font-weight: 700;
+        line-height: 1.02;
+        letter-spacing: 0;
+      }
+      .claim {
+        max-width: 680px;
+        margin: 28px 0 0;
+        color: var(--ink);
+        font-size: clamp(24px, 3.4vw, 40px);
+        line-height: 1.32;
+        font-weight: 800;
+      }
+      .desc {
+        max-width: 680px;
+        margin: 26px 0 0;
+        color: var(--muted);
+        font-size: 18px;
+        line-height: 1.9;
+      }
+      .cta-row {
+        display: flex;
+        gap: 16px;
+        margin-top: 40px;
+      }
+      .cta {
+        display: inline-flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 22px;
+        border: 1px solid var(--blue);
+        color: var(--blue);
+        text-decoration: none;
+        font-weight: 900;
+      }
+      .cta.primary {
+        color: var(--paper);
+        background: var(--blue);
+      }
+
+      .profile-panel {
+        position: relative;
+        padding: 28px;
+        background: #fffaf0;
+        border: 1px solid var(--line);
+        box-shadow: 0 30px 70px rgba(16, 42, 74, 0.12);
+      }
+      .profile-panel::before {
+        content: "CONTACT";
+        position: absolute;
+        top: -38px;
+        right: -8px;
+        color: rgba(16, 42, 74, 0.12);
+        font-size: 48px;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+      }
+      .profile-panel img {
+        display: block;
+        width: 100%;
+        max-height: 430px;
+        object-fit: contain;
+        background: white;
+      }
+      .profile-panel h2 {
+        margin: 24px 0 8px;
+        color: var(--blue);
+        font-size: 22px;
+      }
+      .profile-panel p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.75;
+      }
+
+      .principles {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0;
+        width: min(1160px, calc(100% - 48px));
+        margin: -42px auto 0;
+        border: 1px solid var(--line);
+        background: rgba(255, 250, 240, 0.78);
+      }
+      .principle {
+        padding: 24px;
+        border-right: 1px solid var(--line);
+      }
+      .principle:last-child { border-right: 0; }
+      .principle strong {
+        display: block;
+        color: var(--gold);
+        font-size: 13px;
+        letter-spacing: 0.16em;
+        margin-bottom: 12px;
+      }
+      .principle span {
+        color: var(--blue);
+        font-size: 17px;
+        font-weight: 900;
+      }
+
+      @media (max-width: 880px) {
+        .hero { grid-template-columns: 1fr; }
+        .principles { grid-template-columns: 1fr; margin-top: 0; }
+        .principle { border-right: 0; border-bottom: 1px solid var(--line); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <header>
+        <div class="brand">邱煜完律师</div>
+        <nav><span>首页</span><span>关于我</span><span>产品与服务</span><span>平台文章</span></nav>
+      </header>
+      <main class="hero">
+        <section>
+          <div class="label">LAWYER PERSONAL BRAND</div>
+          <h1>邱煜完律师</h1>
+          <p class="claim">商业利益最大化，法律风险最小化。</p>
+          <p class="desc">
+            专注于争议解决、税务合规、企业刑事风险处置与 AI 行业数据合规服务，为企业家、高管和成长型企业提供面向结果的法律解决方案。
+          </p>
+          <div class="cta-row">
+            <a class="cta primary" href="#">预约初步沟通</a>
+            <a class="cta" href="#">查看服务矩阵</a>
+          </div>
+        </section>
+        <aside class="profile-panel">
+          <img src="./assets/wechat-qr.png" alt="邱煜完律师微信二维码" />
+          <h2>添加微信咨询</h2>
+          <p>适合需要初步判断争议路径、税务风险、经营刑事风险或 AI 数据合规问题的企业经营者。</p>
+        </aside>
+      </main>
+      <section class="principles">
+        <div class="principle"><strong>01</strong><span>事实与证据优先</span></div>
+        <div class="principle"><strong>02</strong><span>以商业目标校准法律路径</span></div>
+        <div class="principle"><strong>03</strong><span>提前识别税务与刑事风险</span></div>
+        <div class="principle"><strong>04</strong><span>让合规成为业务能力</span></div>
+      </section>
+    </div>
+  </body>
+</html>

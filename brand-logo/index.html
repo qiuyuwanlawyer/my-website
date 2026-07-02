@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>邱煜完律师团队 - Logo V2</title>
+  <style>
+    * { box-sizing: border-box; }
+    :root {
+      --ink: #171615;
+      --paper: #f7f3eb;
+      --muted: #746d62;
+      --line: rgba(23, 22, 21, .15);
+      --gold: #9b7a35;
+      --gold-bright: #c7a455;
+      --panel: #fffdfa;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+    }
+    main { max-width: 1180px; margin: 0 auto; padding: 58px 24px 60px; }
+    header { display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; padding-bottom: 30px; border-bottom: 1px solid var(--line); }
+    h1 { margin: 0; font-size: 38px; line-height: 1.18; font-weight: 620; letter-spacing: 0; }
+    .lead { margin: 14px 0 0; max-width: 680px; color: var(--muted); font-size: 15px; line-height: 1.8; }
+    .hero-mark { width: 92px; height: 92px; border-radius: 8px; overflow: hidden; box-shadow: 0 18px 48px rgba(23,22,21,.16); }
+    .hero-mark img { display: block; width: 100%; height: 100%; }
+    .section-title { margin: 38px 0 16px; font-size: 18px; font-weight: 650; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .card { background: var(--panel); border: 1px solid var(--line); overflow: hidden; }
+    .preview { min-height: 260px; display: grid; place-items: center; background: #ece5d8; padding: 28px; }
+    .preview.dark { background: var(--ink); }
+    .preview img { display: block; max-width: 100%; max-height: 210px; object-fit: contain; }
+    .copy { padding: 20px 20px 22px; }
+    .eyebrow { margin: 0 0 8px; color: var(--gold); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; }
+    h2 { margin: 0 0 10px; font-size: 21px; line-height: 1.3; font-weight: 620; letter-spacing: 0; }
+    p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.75; }
+    .wide { display: grid; gap: 18px; }
+    .wide .preview { min-height: 260px; }
+    .wide .preview img { max-height: none; width: min(100%, 760px); }
+    .cover .preview { min-height: 320px; }
+    .cover .preview img { width: min(100%, 900px); }
+    .recommend {
+      margin-top: 28px;
+      padding: 22px 24px;
+      border-left: 4px solid var(--gold);
+      background: rgba(155,122,53,.08);
+      color: var(--ink);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+    footer { margin-top: 28px; color: var(--muted); font-size: 13px; line-height: 1.8; }
+    @media (max-width: 920px) {
+      header { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: 1fr; }
+      .hero-mark { width: 84px; height: 84px; }
+    }
+    @media (max-width: 620px) {
+      main { padding: 38px 16px; }
+      h1 { font-size: 29px; }
+      .preview { min-height: 220px; }
+      .cover .preview { min-height: 210px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div>
+        <h1>邱煜完律师团队 Logo V2</h1>
+        <p class="lead">这版把「邱」字放到第一识别层，优先服务网页页眉、公众号头像和公众号封面。远看先认出“邱”，近看再进入律师团队的专业感。</p>
+      </div>
+      <div class="hero-mark">
+        <img src="png/v2-qiu-avatar-dark.png" alt="邱煜完律师团队头像标识" />
+      </div>
+    </header>
+
+    <h2 class="section-title">公众号头像 / 网站头像</h2>
+    <section class="grid" aria-label="Avatar logo options">
+      <article class="card">
+        <div class="preview dark"><img src="png/v2-qiu-avatar-dark.png" alt="深色邱字头像" /></div>
+        <div class="copy">
+          <p class="eyebrow">Recommended Avatar</p>
+          <h2>深色邱字方标</h2>
+          <p>公众号头像首选。单字足够大，圆形裁切后仍能清楚看出是「邱」，黑金配色也更贴近法律服务的稳重气质。</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="preview"><img src="png/v2-qiu-avatar-light.png" alt="浅色邱字头像" /></div>
+        <div class="copy">
+          <p class="eyebrow">Light Background</p>
+          <h2>浅色邱字方标</h2>
+          <p>适合网页浅色导航、PPT、白底文档页眉。与深色版同一结构，方便形成统一视觉系统。</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="preview dark"><img src="png/v2-qiu-seal.png" alt="邱字方章标识" /></div>
+        <div class="copy">
+          <p class="eyebrow">Formal Seal</p>
+          <h2>方章辅助版</h2>
+          <p>用于文章末尾、案例海报角标或正式资料。它比头像版更像品牌章，但小尺寸时不如单字版清楚。</p>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="section-title">网页页眉 / 横向 Logo</h2>
+    <section class="wide" aria-label="Website wordmark options">
+      <article class="card">
+        <div class="preview dark"><img src="png/v2-qiu-wordmark-dark.png" alt="深色网页横向 Logo" /></div>
+        <div class="copy">
+          <p class="eyebrow">Website Header Dark</p>
+          <h2>网页横向深色版</h2>
+          <p>适合放在网站首页顶部、深色页脚、深色海报。左侧大「邱」负责识别，右侧全称负责品牌说明。</p>
+        </div>
+      </article>
+      <article class="card">
+        <div class="preview"><img src="png/v2-qiu-wordmark-light.png" alt="浅色网页横向 Logo" /></div>
+        <div class="copy">
+          <p class="eyebrow">Website Header Light</p>
+          <h2>网页横向浅色版</h2>
+          <p>适合当前个人网站的浅色区域，也适合公众号文章插图、名片和打印材料。</p>
+        </div>
+      </article>
+    </section>
+
+    <h2 class="section-title">公众号封面</h2>
+    <section class="cover" aria-label="WeChat cover">
+      <article class="card">
+        <div class="preview dark"><img src="png/v2-wechat-cover.png" alt="公众号封面版 Logo" /></div>
+        <div class="copy">
+          <p class="eyebrow">WeChat Cover</p>
+          <h2>公众号封面版</h2>
+          <p>按公众号封面比例做了横向排版，左侧「邱」作为视觉锚点，右侧团队名称和业务关键词适合放在文章首图。</p>
+        </div>
+      </article>
+    </section>
+
+    <div class="recommend">
+      建议采用：公众号头像用「深色邱字方标」；网站导航用「网页横向浅色版」；公众号封面用「公众号封面版」。这三个组合在不同场景里都能先认出“邱”。
+    </div>
+
+    <footer>
+      SVG 文件在 brand-logo/svg/，PNG 文件在 brand-logo/png/。旧版抽象方案仍保留，可作为后续辅助图形参考。
+    </footer>
+  </main>
+</body>
+</html>

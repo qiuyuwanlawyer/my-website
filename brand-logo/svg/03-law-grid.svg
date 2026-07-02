@@ -1,0 +1,16 @@
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Qiu Lawyer Team Logo - Law Grid</title>
+  <desc id="desc">A modular evidence grid with an emphasized judgment path.</desc>
+  <g fill="currentColor">
+    <rect x="24" y="22" width="12" height="12" rx="3"/>
+    <rect x="44" y="22" width="12" height="12" rx="3"/>
+    <rect x="64" y="22" width="12" height="12" rx="3" opacity=".42"/>
+    <rect x="24" y="44" width="12" height="12" rx="3" opacity=".42"/>
+    <rect x="44" y="44" width="12" height="12" rx="3"/>
+    <rect x="64" y="44" width="12" height="12" rx="3"/>
+    <rect x="24" y="66" width="12" height="12" rx="3"/>
+    <rect x="44" y="66" width="12" height="12" rx="3" opacity=".42"/>
+    <rect x="64" y="66" width="12" height="12" rx="3"/>
+  </g>
+  <path d="M30 72Q47 45 70 28" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+</svg>

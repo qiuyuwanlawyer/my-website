@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>方向一 · 精品律所深色质感</title>
+    <style>
+      :root {
+        --ink: #f7f3ea;
+        --muted: rgba(247, 243, 234, 0.68);
+        --line: rgba(247, 243, 234, 0.16);
+        --navy: #070b24;
+        --navy-deep: #030617;
+        --blue: #16a7d7;
+        --gold: #c9a45b;
+        --paper: #eee7da;
+        --body: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        color: var(--ink);
+        font-family: var(--body);
+        background: var(--navy-deep);
+      }
+
+      .page {
+        min-height: 100vh;
+        overflow: hidden;
+        background:
+          linear-gradient(90deg, rgba(3, 6, 23, 0.98) 0%, rgba(7, 11, 36, 0.88) 44%, rgba(7, 11, 36, 0.3) 72%),
+          radial-gradient(circle at 70% 35%, rgba(22, 167, 215, 0.22), transparent 36%),
+          var(--navy-deep);
+      }
+
+      .architectural {
+        position: absolute;
+        inset: 0 -8% 0 auto;
+        width: 64vw;
+        opacity: 0.82;
+        transform: skewX(-14deg);
+        pointer-events: none;
+      }
+
+      .blade {
+        position: absolute;
+        bottom: -8vh;
+        width: 4.2vw;
+        height: 86vh;
+        background: linear-gradient(90deg, rgba(15, 64, 96, 0.12), #56d8ff 45%, #b7f2ff 58%, rgba(12, 45, 80, 0.3));
+        box-shadow: 0 0 42px rgba(35, 180, 228, 0.35);
+        transform-origin: bottom center;
+      }
+      .blade:nth-child(1) { left: 5%; height: 42vh; }
+      .blade:nth-child(2) { left: 17%; height: 52vh; }
+      .blade:nth-child(3) { left: 29%; height: 64vh; }
+      .blade:nth-child(4) { left: 41%; height: 76vh; }
+      .blade:nth-child(5) { left: 53%; height: 90vh; }
+      .blade:nth-child(6) { left: 65%; height: 98vh; }
+      .blade:nth-child(7) { left: 77%; height: 106vh; }
+      .blade:nth-child(8) { left: 89%; height: 116vh; }
+
+      header {
+        position: relative;
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto;
+        padding: 34px 0;
+      }
+
+      .brand {
+        display: grid;
+        gap: 4px;
+        letter-spacing: 0.18em;
+        font-size: 15px;
+        font-weight: 800;
+      }
+      .brand small {
+        color: var(--muted);
+        font-size: 11px;
+        letter-spacing: 0.34em;
+        font-weight: 500;
+      }
+
+      nav {
+        display: flex;
+        gap: 44px;
+        color: rgba(247, 243, 234, 0.86);
+        font-size: 14px;
+        font-weight: 700;
+      }
+
+      .hero {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        align-items: end;
+        min-height: calc(100vh - 104px);
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto;
+        padding: 7vh 0 12vh;
+      }
+
+      .hero-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 280px;
+        align-items: end;
+        gap: 72px;
+      }
+
+      .kicker {
+        margin: 0 0 24px;
+        color: var(--gold);
+        letter-spacing: 0.28em;
+        font-size: 13px;
+        font-weight: 800;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 720px;
+        font-size: clamp(54px, 7vw, 104px);
+        line-height: 1.05;
+        letter-spacing: 0;
+        font-weight: 800;
+      }
+
+      .statement {
+        margin: 30px 0 0;
+        max-width: 680px;
+        color: var(--muted);
+        font-size: 19px;
+        line-height: 1.9;
+      }
+
+      .actions {
+        display: flex;
+        gap: 14px;
+        margin-top: 44px;
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        min-height: 48px;
+        padding: 0 22px;
+        border: 1px solid var(--line);
+        color: var(--ink);
+        font-size: 14px;
+        font-weight: 800;
+        text-decoration: none;
+      }
+      .btn.primary {
+        border-color: var(--gold);
+        background: var(--gold);
+        color: #080b18;
+      }
+
+      .contact-card {
+        border-left: 1px solid var(--line);
+        padding-left: 28px;
+      }
+      .contact-card img {
+        display: block;
+        width: 176px;
+        height: 246px;
+        object-fit: cover;
+        background: white;
+      }
+      .contact-card p {
+        margin: 16px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
+      .services {
+        position: relative;
+        z-index: 2;
+        border-top: 1px solid var(--line);
+        background: rgba(3, 6, 23, 0.74);
+      }
+      .service-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        width: min(1180px, calc(100% - 56px));
+        margin: 0 auto;
+      }
+      .service {
+        min-height: 150px;
+        padding: 30px 26px 32px;
+        border-right: 1px solid var(--line);
+      }
+      .service:first-child { border-left: 1px solid var(--line); }
+      .service span {
+        color: var(--gold);
+        font-size: 12px;
+        letter-spacing: 0.18em;
+      }
+      .service h2 {
+        margin: 18px 0 10px;
+        font-size: 22px;
+      }
+      .service p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.7;
+      }
+
+      @media (max-width: 820px) {
+        nav { gap: 18px; font-size: 13px; }
+        .hero-inner { grid-template-columns: 1fr; }
+        .contact-card { border-left: 0; padding-left: 0; }
+        .service-grid { grid-template-columns: 1fr; }
+        .service, .service:first-child { border-left: 1px solid var(--line); }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <div class="architectural" aria-hidden="true">
+        <i class="blade"></i><i class="blade"></i><i class="blade"></i><i class="blade"></i>
+        <i class="blade"></i><i class="blade"></i><i class="blade"></i><i class="blade"></i>
+      </div>
+      <header>
+        <div class="brand">QIU YUWAN <small>LAWYER</small></div>
+        <nav>
+          <span>首页</span><span>关于我</span><span>产品与服务</span><span>平台文章</span>
+        </nav>
+      </header>
+      <main class="hero">
+        <div class="hero-inner">
+          <section>
+            <p class="kicker">争议解决 · 税务合规 · 企业刑事风险 · AI 数据合规</p>
+            <h1>商业利益最大化，法律风险最小化。</h1>
+            <p class="statement">
+              邱煜完律师专注于争议解决、税务合规、企业刑事风险处置与 AI 行业数据合规服务，为企业家、高管和成长型企业提供面向结果的法律解决方案。
+            </p>
+            <div class="actions">
+              <a class="btn primary" href="#">添加微信咨询</a>
+              <a class="btn" href="#">查看服务</a>
+            </div>
+          </section>
+          <aside class="contact-card">
+            <img src="./assets/wechat-qr.png" alt="邱煜完律师微信二维码" />
+            <p>扫码添加微信，简要说明你的问题、企业背景与当前风险节点。</p>
+          </aside>
+        </div>
+      </main>
+    </div>
+    <section class="services">
+      <div class="service-grid">
+        <article class="service"><span>01</span><h2>争议解决</h2><p>商事诉讼、仲裁、谈判、执行与复杂纠纷处理。</p></article>
+        <article class="service"><span>02</span><h2>税务合规</h2><p>税务稽查、税务争议、合规审查与涉税风险防控。</p></article>
+        <article class="service"><span>03</span><h2>企业刑事风险</h2><p>面向企业家和高管的经营刑事风险识别与危机处置。</p></article>
+        <article class="service"><span>04</span><h2>AI 数据合规</h2><p>AI 企业、数据产品与平台业务的数据合规路径设计。</p></article>
+      </div>
+    </section>
+  </body>
+</html>
