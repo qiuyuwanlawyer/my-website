@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { topics } from "../../data/topics";
+
+export function getStaticPaths() {
+  const modules = import.meta.glob("../../content/articles/*.md", { eager: true });
+  const articles = Object.entries(modules).map(([path, module]) => ({
+    slug: path.split("/").pop()?.replace(".md", ""),
+    ...(module as { frontmatter: Record<string, string> }).frontmatter
+  }));
+
+  return topics.map((topic) => ({
+    params: { slug: topic.slug },
+    props: {
+      topic,
+      articles: topic.slugs
+        .map((slug) => articles.find((article) => article.slug === slug))
+        .filter(Boolean)
+    }
+  }));
+}
+
+const { topic, articles } = Astro.props;
+---
+
+<BaseLayout
+  title={`${topic.title} | 邱煜完律师`}
+  description={topic.description}
+  pageSchema={{
+    "@type": "CollectionPage",
+    "@id": `https://qiuyuwan.cn/topics/${topic.slug}#collection`,
+    name: topic.title,
+    description: topic.description,
+    about: topic.questions,
+    mainEntity: {
+      "@type": "ItemList",
+      numberOfItems: articles.length,
+      itemListElement: articles.map((article, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `https://qiuyuwan.cn/articles/${article.slug}`,
+        name: article.title
+      }))
+    }
+  }}
+>
+  <section class="page-hero topic-hero">
+    <p class="eyebrow">专业专题</p>
+    <h1>{topic.title}</h1>
+    <p>{topic.description}</p>
+  </section>
+
+  <section class="section topic-answer">
+    <div><span>核心判断</span><h2>先把问题放回事实与证据</h2></div>
+    <p>{topic.directAnswer}</p>
+  </section>
+
+  <section class="section topic-questions">
+    <div class="section-head"><h2>这个专题回答什么</h2></div>
+    <ol>
+      {topic.questions.map((question, index) => (
+        <li><span>{String(index + 1).padStart(2, "0")}</span><strong>{question}</strong></li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section topic-reading">
+    <div class="section-head">
+      <div><p class="eyebrow">READING PATH</p><h2>专题文章</h2></div>
+      <span>建议按顺序阅读</span>
+    </div>
+    <div class="topic-article-list">
+      {articles.map((article, index) => (
+        <a href={`/articles/${article.slug}`}>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <div>
+            <p>{article.date.replaceAll("-", ".")} · {article.category} · {article.type}</p>
+            <h3>{article.title}</h3>
+            <small>{article.summary}</small>
+          </div>
+          <strong>阅读 →</strong>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section topic-boundary">
+    <strong>阅读说明</strong>
+    <p>专题内容用于帮助理解一般法律规则和实务判断框架，不构成针对具体事项的法律意见。文章可能同时归入多个专题，因为真实业务中的刑事、税务与技术风险往往相互交叉。</p>
+  </section>
+</BaseLayout>

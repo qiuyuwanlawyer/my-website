@@ -1,0 +1,85 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const videos = [
+  {
+    label: "INTERVIEW / 01",
+    title: "AI 能替代刑辩律师吗？",
+    src: "/videos/lawyer-talk-37.mp4",
+    poster: "/videos/ai-criminal-defense-cover.png",
+    mobilePoster: "/videos/covers/cover-collage-3x4-cn.png",
+    duration: "02:07",
+    description:
+      "全民 AI 时代，很多人会疑惑刑事律师是否会被替代。AI 可以撰写文书、检索法条、梳理逻辑，却永远替代不了刑辩最核心的力量。真正的刑事辩护，从来不止落笔成文，更是读懂人心、共情处境、周旋人情世故，在复杂人性与案件困境里，为当事人权衡利弊、守住底线、争取最优结果。"
+  },
+  {
+    label: "INTERVIEW / 02",
+    title: "律师会主动发问，AI 只能被动回答",
+    src: "/videos/lawyer-talk-38.mp4",
+    poster: "/videos/ai-criminal-defense-cover.png",
+    mobilePoster: "/videos/covers/cover-artdirector-3x4.png",
+    duration: "01:45",
+    description:
+      "律师会主动发问，AI 只能被动回答。AI 虽然可以辅助分析，但终究是被动的：它无法为你多问一句，也不会为你多跑一趟。"
+  }
+];
+---
+
+<BaseLayout title="访谈视频 | 邱煜完律师" description="邱煜完律师的访谈视频，讨论刑事辩护、AI 与法律服务等实务问题。">
+  <section class="page-hero video-page-hero">
+    <p class="eyebrow">VIDEO INTERVIEWS</p>
+    <h1>访谈视频</h1>
+    <p>用两分钟讨论一个法律问题。技术可以提高信息处理效率，真正影响案件走向的，仍然是对事实、人性与程序的理解。</p>
+  </section>
+
+  <section class="section video-library" aria-label="访谈视频列表">
+    {videos.map((video) => (
+      <article class="video-card">
+        <div class="video-card-meta">
+          <span>{video.label}</span>
+          <h2>{video.title}</h2>
+          <p class="video-card-description">{video.description}</p>
+          <p class="video-card-duration">完整视频 · {video.duration}</p>
+        </div>
+        <div class="video-player-shell">
+          <video
+            controls
+            playsinline
+            preload="none"
+            poster={video.poster}
+            data-desktop-poster={video.poster}
+            data-mobile-poster={video.mobilePoster}
+            aria-label={`${video.title}完整视频`}
+          >
+            <source src={video.src} type="video/mp4" />
+            您的浏览器暂不支持视频播放。
+          </video>
+        </div>
+      </article>
+    ))}
+  </section>
+
+  <script is:inline>
+    const mobileVideoQuery = window.matchMedia("(max-width: 760px)");
+    const responsiveVideos = document.querySelectorAll("video[data-mobile-poster]");
+
+    const syncVideoPosters = () => {
+      responsiveVideos.forEach((video) => {
+        const nextPoster = mobileVideoQuery.matches
+          ? video.dataset.mobilePoster
+          : video.dataset.desktopPoster;
+
+        if (nextPoster && video.getAttribute("poster") !== nextPoster) {
+          video.setAttribute("poster", nextPoster);
+        }
+      });
+    };
+
+    responsiveVideos.forEach((video) => {
+      video.addEventListener("play", () => video.classList.add("is-playing"), { once: true });
+    });
+
+    syncVideoPosters();
+    mobileVideoQuery.addEventListener("change", syncVideoPosters);
+  </script>
+</BaseLayout>

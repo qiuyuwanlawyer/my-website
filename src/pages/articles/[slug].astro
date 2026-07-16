@@ -1,0 +1,69 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+
+export function getStaticPaths() {
+  const modules = import.meta.glob("../../content/articles/*.md", { eager: true });
+  const entries = Object.entries(modules).map(([path, module]) => ({
+    slug: path.split("/").pop()?.replace(".md", ""),
+    module: module as { frontmatter: Record<string, string>; Content: unknown }
+  }));
+
+  return entries.map(({ slug, module }, index) => ({
+    params: { slug },
+    props: {
+      frontmatter: module.frontmatter,
+      Content: module.Content,
+      previous: entries[index - 1]?.module.frontmatter,
+      previousSlug: entries[index - 1]?.slug,
+      next: entries[index + 1]?.module.frontmatter,
+      nextSlug: entries[index + 1]?.slug
+    }
+  }));
+}
+
+const { frontmatter, Content, previous, previousSlug, next, nextSlug } = Astro.props;
+---
+
+<BaseLayout
+  title={`${frontmatter.title} | 邱煜完律师`}
+  description={frontmatter.summary}
+  pageSchema={{
+    "@type": "Article",
+    "@id": `https://qiuyuwan.cn/articles/${Astro.params.slug}#article`,
+    headline: frontmatter.title,
+    description: frontmatter.summary,
+    datePublished: frontmatter.date,
+    dateModified: frontmatter.date,
+    inLanguage: "zh-CN",
+    articleSection: frontmatter.category,
+    author: { "@id": "https://qiuyuwan.cn/#person", "@type": "Person", name: frontmatter.author },
+    publisher: { "@id": "https://qiuyuwan.cn/#person" },
+    mainEntityOfPage: `https://qiuyuwan.cn/articles/${Astro.params.slug}`
+  }}
+>
+  <header class="article-detail-hero">
+    <a href="/articles">← 返回文章列表</a>
+    <p>{frontmatter.category} · {frontmatter.type}</p>
+    <h1>{frontmatter.title}</h1>
+    <div><span>{frontmatter.date.replaceAll("-", ".")}</span><span>作者：{frontmatter.author}</span><span>BASE 杭州 · 全国办案</span></div>
+  </header>
+
+  <main class="article-reading-shell">
+    <aside class="article-reading-note">
+      <p>READING NOTE</p>
+      <span>{frontmatter.summary}</span>
+    </aside>
+    <article class="article-body">
+      <Content />
+      <footer class="article-disclaimer">
+        <strong>声明</strong>
+        <p>本文仅作一般性法律知识分享，不构成针对具体事项的法律意见。案件事实、证据和程序阶段不同，结论可能存在差异。</p>
+      </footer>
+    </article>
+  </main>
+
+  <nav class="article-pagination" aria-label="文章翻页">
+    {previous ? <a href={`/articles/${previousSlug}`}><span>上一篇</span><strong>{previous.title}</strong></a> : <i></i>}
+    {next ? <a href={`/articles/${nextSlug}`}><span>下一篇</span><strong>{next.title}</strong></a> : <i></i>}
+  </nav>
+</BaseLayout>

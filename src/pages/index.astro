@@ -3,37 +3,33 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
 const services = [
   {
-    index: "01",
     title: "争议解决",
     text: "围绕诉讼、仲裁、谈判、执行与复杂商事纠纷，帮助企业稳住证据、节奏与商业结果。"
   },
   {
-    index: "02",
     title: "税务合规",
     text: "处理税务稽查、涉税争议、合规审查与企业经营中的税务风险防控。"
   },
   {
-    index: "03",
     title: "企业刑事风险",
     text: "面向企业家、公司高管和经营活动中的刑事风险，提供前置识别与处置方案。"
   },
   {
-    index: "04",
     title: "AI 数据合规",
     text: "为 AI 企业、数据产品和平台业务梳理数据来源、使用边界与合规路径。"
   }
 ];
 
 const articles = [
-  ["争议解决", "复杂商事争议中，企业如何先稳住证据与谈判位置"],
-  ["税务合规", "税务稽查启动前后，企业经营者应关注的关键动作"],
-  ["刑事风险", "企业高管面对经营刑事风险时，哪些问题不能拖"],
-  ["AI 数据合规", "AI 数据服务中的合规边界，如何从业务流程里建立"],
-  ["公司治理", "股东矛盾进入僵局时，经营层如何降低连带风险"],
-  ["合同风控", "重大交易合同签署前，哪些条款应当重新审视"],
-  ["税务合规", "企业日常报销与发票管理中的高频风险点"],
-  ["争议解决", "从律师视角看商业谈判中的风险预案"],
-  ["经营风险", "企业家个人责任与公司责任之间的风险隔离"]
+  ["AI 数据合规", "大模型 API 中转站的数据合规义务与刑事风险", "llm-api-relay-data-compliance", "2026.06.18"],
+  ["税务稽查", "被税务稽查了，什么时候该找律师？", "when-tax-audit-needs-lawyer", "2026.06.24"],
+  ["税务刑事", "进项销项同时虚开，量刑时怎么算？", "input-output-invoice-amount", "2026.06.18"],
+  ["税务刑事", "虚增业绩开了票，会不会进去？", "inflated-performance-invoicing", "2026.06.16"],
+  ["税务刑事", "对开环开不入罪？2024司法解释的救命条款", "circular-invoicing-boundaries", "2026.06.11"],
+  ["案例评析", "张某强无罪案：最高法院推翻虚开判决，讲了什么道理", "zhang-mouqiang-innocent-case", "2026.06.10"],
+  ["合同风控", "数字指纹，契约新章：电子签章效力实务解析", "electronic-signature-validity", "2026.04.14"],
+  ["建设工程", "光伏项目电网接入批复代办纠纷实务解析", "photovoltaic-grid-approval-agency-dispute", "2026.01.09"],
+  ["税务刑事", "金税四期下，企业主最容易触犯的5个税务刑事红线", "tax-criminal-red-lines", "2026.06.08"]
 ];
 ---
 
@@ -80,10 +76,16 @@ const articles = [
     </aside>
   </section>
 
+  <section class="trust-rail" aria-label="专业身份与服务特点">
+    <div><strong>杭州</strong><span>执业据点，全国办案</span></div>
+    <div><strong>法学 × 工程</strong><span>双重专业训练</span></div>
+    <div><strong>不起诉经验</strong><span>刑事风险早期处置</span></div>
+    <div><strong>2023 年起</strong><span>系统应用 AI 于法律工作</span></div>
+  </section>
+
   <section class="service-strip" aria-label="核心业务">
     {services.map((service) => (
       <article class="service-tile">
-        <em>{service.index}</em>
         <h2>{service.title}</h2>
         <p>{service.text}</p>
       </article>
@@ -99,13 +101,56 @@ const articles = [
       <a class="text-link" href="/articles">查看全部</a>
     </div>
     <div class="article-grid">
-      {articles.map(([category, title]) => (
-        <article class="article-card">
-          <p>{category} / 占位文章</p>
+      {articles.map(([category, title, slug, date]) => (
+        <a class="article-card" href={`/articles/${slug}`}>
+          <p>{category} / {date}</p>
           <h3>{title}</h3>
           <span>→</span>
-        </article>
+        </a>
       ))}
     </div>
+  </section>
+
+  <section class="section home-video-section">
+    <a class="home-video-card" href="/videos">
+      <div>
+        <p class="eyebrow">VIDEO INTERVIEWS</p>
+        <h2>访谈视频</h2>
+        <strong>AI 能替代刑辩律师吗？</strong>
+        <span>观看完整视频 →</span>
+      </div>
+      <img
+        src="/videos/covers/cover-collage-16x9-cn.png"
+        alt="AI 能替代刑辩律师吗访谈视频封面"
+        width="1672"
+        height="941"
+        loading="lazy"
+        decoding="async"
+      />
+    </a>
+  </section>
+
+  <section class="section engagement-section">
+    <div class="engagement-head">
+      <h2>合作从把问题说清楚开始</h2>
+      <p>涉及敏感材料时，可先做必要脱敏。正式接收材料前，将先确认利益冲突、服务范围与工作安排。</p>
+    </div>
+    <ol class="engagement-steps">
+      <li><span>01</span><strong>说明现状</strong><p>简要说明主体、事件、当前阶段和最紧迫的问题。</p></li>
+      <li><span>02</span><strong>材料预审</strong><p>根据问题类型确定需要查看的核心材料及脱敏方式。</p></li>
+      <li><span>03</span><strong>确认方案</strong><p>明确服务范围、工作成果、时间安排与费用方式。</p></li>
+      <li><span>04</span><strong>启动工作</strong><p>在完成必要手续后，按约定推进沟通、研究与处置。</p></li>
+    </ol>
+  </section>
+
+  <section class="section podcast-intro-section">
+    <a class="podcast-intro" href="/podcast">
+      <div class="podcast-intro-copy">
+        <p class="eyebrow">PODCAST</p>
+        <h2>二叉树与三段论</h2>
+        <p>一档由邱煜完律师和他的朋友们共同制作的技术法律播客。</p>
+        <span>进入播客栏目 →</span>
+      </div>
+    </a>
   </section>
 </BaseLayout>

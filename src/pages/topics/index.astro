@@ -1,0 +1,22 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { topics } from "../../data/topics";
+---
+
+<BaseLayout title="专业专题 | 邱煜完律师" description="邱煜完律师关于刑事风险与不起诉、税务刑事与税企争议、AI 数据合规的专题研究。">
+  <section class="page-hero topic-index-hero">
+    <p class="eyebrow">RESEARCH TOPICS</p>
+    <h1>专业专题</h1>
+    <p>围绕三个持续研究方向，把分散文章整理成可以逐层阅读、相互印证的知识体系。</p>
+  </section>
+
+  <section class="section topic-index-list">
+    {topics.map((topic, index) => (
+      <a class="topic-index-item" href={`/topics/${topic.slug}`}>
+        <span>{String(index + 1).padStart(2, "0")}</span>
+        <div><h2>{topic.title}</h2><p>{topic.description}</p></div>
+        <strong>进入专题 →</strong>
+      </a>
+    ))}
+  </section>
+</BaseLayout>

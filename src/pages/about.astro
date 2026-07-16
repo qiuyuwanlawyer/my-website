@@ -2,24 +2,98 @@
 import BaseLayout from "../layouts/BaseLayout.astro";
 
 const timeline = [
-  ["01", "专注企业经营风险", "围绕企业争议、税务合规、企业刑事风险等高压场景，形成以经营结果为中心的法律服务方法。"],
-  ["02", "服务企业家与高管", "关注决策者在交易、治理、税务、资金往来和争议处置中的个人责任边界。"],
-  ["03", "拓展 AI 数据合规", "面向 AI 行业数据服务，协助企业识别数据来源、处理、输出与商业化环节的合规问题。"]
+  ["01", "法学与工程双重训练", "本科阶段取得法学与水文水资源工程两个学位。工程训练让我习惯把复杂问题拆开，法律训练让我重视关系、证据与责任边界。"],
+  ["02", "处理企业高压风险", "围绕企业经营中的民商事争议、刑事风险、税务合规和人员责任边界开展工作，重视在程序早期把事实、证据与应对顺序梳理清楚。"],
+  ["03", "将 AI 嵌入法律服务", "自 2023 年起系统性使用 AI 工具辅助法律研究、卷宗整理、事实梳理与可视化表达，把更多时间留给策略、判断和沟通。"]
+];
+
+const stats = [
+  ["2 亿+", "累计参与诉讼 / 仲裁标的额"],
+  ["不起诉", "曾协助刑事案件客户取得不起诉结果"],
+  ["2023 年起", "系统性将 AI 工具嵌入法律工作"],
+  ["500+", "累计审查合同份数"]
+];
+
+const focuses = [
+  "刑事辩护与刑事风险处置",
+  "AI 与数据合规",
+  "AI 与法律服务融合",
+  "税务合规与税企争议",
+  "民商事争议解决",
+  "公司法律事务与企业法律顾问",
+  "技术 + 法律专门性问题研判",
+  "诉讼可视化呈现",
+  "建设工程与复杂项目争议"
+];
+
+const signatureExperience = [
+  {
+    index: "01",
+    label: "CRIMINAL RISK",
+    title: "刑事风险处置与不起诉结果",
+    text: "曾在刑事案件中协助客户取得不起诉结果。处理此类事项时，我关注的不只是程序应对，也包括经营事实、岗位职责、证据材料与个人责任边界，尽可能在早期把风险看清、把应对做稳。"
+  },
+  {
+    index: "02",
+    label: "AI × LEGAL",
+    title: "AI 与法律服务深度融合",
+    text: "自 2023 年起，将 AI 用于法律研究、卷宗与材料结构化、事实时间线、证据关系梳理和诉讼可视化，并参与团队 AI 应用竞赛获奖项目。AI 负责提升信息处理效率，律师负责最终判断、策略与责任。"
+  }
+];
+
+const complexExperience = [
+  "参与多起重大合同、公司治理、买卖合同及劳动争议的谈判、诉讼与仲裁工作",
+  "参与国际运输合同纠纷、建设工程及复杂能源项目争议，累计参与诉讼 / 仲裁标的额超过 2 亿元",
+  "参与大型项目全周期合同审查、工程总承包管理模式研究及变更索赔法律风险管控专项"
 ];
 ---
 
-<BaseLayout title="关于我 | 邱煜完律师">
+<BaseLayout
+  title="关于我 | 邱煜完律师"
+  pageSchema={{
+    "@type": "ProfilePage",
+    "@id": "https://qiuyuwan.cn/about#profile",
+    mainEntity: {
+      "@id": "https://qiuyuwan.cn/#person",
+      "@type": "Person",
+      name: "邱煜完",
+      jobTitle: "律师",
+      workLocation: { "@type": "Place", name: "杭州" },
+      areaServed: { "@type": "Country", name: "中国" },
+      knowsAbout: focuses
+    }
+  }}
+>
   <section class="page-hero">
     <p class="eyebrow">ABOUT</p>
     <h1>关于邱煜完律师</h1>
     <p>
-      我的工作重点，是帮助企业家、公司高管和企业经营者在复杂争议、税务风险、刑事风险与新兴数据业务中做出更稳妥的判断。
+      我关注企业经营中的高压法律问题：刑事风险如何尽早处置，争议与责任如何划清，以及 AI 与数据业务如何在合规边界内落地。
     </p>
+    <div class="practice-reach" aria-label="执业地点与服务范围">
+      <span><small>执业据点</small><strong>杭州</strong></span>
+      <span><small>服务范围</small><strong>全国办案</strong></span>
+    </div>
+  </section>
+
+  <section class="content-split signature-section">
+    <div>
+      <h2>重点经验</h2>
+      <p class="side-note">刑事风险处置与 AI 法律服务融合，是我希望持续深化的两条专业主线。</p>
+    </div>
+    <div class="signature-grid">
+      {signatureExperience.map((item) => (
+        <article>
+          <div class="signature-meta"><span>{item.index}</span><em>{item.label}</em></div>
+          <h3>{item.title}</h3>
+          <p>{item.text}</p>
+        </article>
+      ))}
+    </div>
   </section>
 
   <section class="content-split">
     <div>
-      <p class="eyebrow">TIMELINE</p>
       <h2>专业路径</h2>
     </div>
     <div class="timeline">
@@ -35,20 +109,73 @@ const timeline = [
     </div>
   </section>
 
+  <section class="content-split">
+    <div>
+      <h2>几个数字</h2>
+    </div>
+    <div class="stats-grid">
+      {stats.map(([value, label]) => (
+        <article>
+          <strong>{value}</strong>
+          <span>{label}</span>
+        </article>
+      ))}
+    </div>
+  </section>
+
   <section class="content-split story">
     <div>
-      <p class="eyebrow">STORY</p>
       <h2>我的故事</h2>
     </div>
     <div class="prose">
       <p>
-        我理解的法律服务，不只是告诉客户“法律上可以或不可以”，而是在事实、证据、商业目标与风险成本之间，帮助客户找到一条可以执行的路径。企业经营中的许多风险并不会以单一法律问题出现，而是同时牵涉合同、税务、资金、治理、人员和外部沟通。
+        我本科拿了两个不同的学位：一个是法学，一个是水文与水资源工程。身边常有人问，学水利的为什么来做律师。我的答案很简单：工程的训练教我把问题拆开看，法律的训练教我把关系理清说。两者叠加，恰好形成了我今天处理案件的方式。
       </p>
       <p>
-        因此，我更关注问题发生前后的完整链条：风险从哪里产生，证据如何保全，谈判位置如何建立，企业家与高管的个人责任如何隔离，税务与刑事风险是否会互相放大。越是复杂问题，越需要先把局面拆清楚，再决定行动顺序。
+        我不希望法律服务停留在“把法条摆给客户看”。我更在意的是：这件事到底卡在哪里，事实和证据能支撑到哪里，下一步最稳的路是什么。越是复杂的争议、税务、刑事或经营风险，越需要先把局面拆清楚，再决定行动顺序。
       </p>
       <p>
-        这个网站会持续沉淀我的专业文章、服务产品与实务观察。它不是一个展示型名片，而是一个面向企业经营风险的长期工作台。
+        2023 年起，我开始系统性地把 AI 工具嵌入法律工作。它可以帮助我更快地整理卷宗、还原时间线、识别事实关系，并把复杂问题可视化；但案件策略、风险判断和最终责任始终由律师承担。我也因此成为较早一批“技术 + 法律”的实践者，并参与团队 AI 应用竞赛获奖项目。
+      </p>
+    </div>
+  </section>
+
+  <section class="content-split">
+    <div>
+      <h2>主要服务方向</h2>
+    </div>
+    <div class="focus-list">
+      {focuses.map((item) => (
+        <span>{item}</span>
+      ))}
+    </div>
+  </section>
+
+  <section class="content-split public-role-section">
+    <div>
+      <h2>社会职务</h2>
+    </div>
+    <article class="public-role-card">
+      <span>理事</span>
+      <div>
+        <p>浙江省法学会</p>
+        <h3>浙籍法学家研究会</h3>
+        <small>持续参与法律共同体的专业交流与研究。</small>
+      </div>
+    </article>
+  </section>
+
+  <section class="content-split">
+    <div>
+      <h2>复合型项目经验</h2>
+      <p class="side-note">工程与能源项目是复杂问题训练的一部分，不是网站呈现的唯一业务方向。</p>
+    </div>
+    <div class="project-list">
+      {complexExperience.map((item) => (
+        <article>{item}</article>
+      ))}
+      <p>
+        以上经历训练了我处理多主体、长周期、高标的复杂事项的能力。具体案件结果取决于事实、证据与程序推进情况，不构成对类似案件结果的承诺。
       </p>
     </div>
   </section>
