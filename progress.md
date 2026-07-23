@@ -144,6 +144,15 @@
 
 - 本轮修改尚未提交 git，提交与推送由用户决定。
 
+## 2026-07-23：提交并发布至 GitHub Pages
+
+- **状态：** complete
+- **完成内容：**
+  - 应用户要求提交并推送：`2979eb0`「首页形象照与移动端体验更新」，15 个文件（+572/−51），覆盖阶段 3D–3F 全部改动与 impeccable 审查快照。
+  - 提交前清理：`public/images/profile-portrait.md`（图片查看工具伴生缓存）已删除不入库；`momo-pet-run/`（空目录）与 `momo-pet-run-v2/`（AI 生图任务残留，与网站无关）保持未跟踪、未提交。
+  - GitHub Actions「Deploy Astro site to GitHub Pages」对 `2979eb0` 运行成功；线上验证：首页含新版复制按钮与坐姿照引用，关于页含窗景照引用，https://qiuyuwan.cn/ 已全量更新。
+- **待办：** 无。本地 preview 服务器（4321 端口）仍在运行，可随时停止。
+
 ## 2026-07-13：建立持续管理机制
 
 ### 阶段 1：建立项目管理基线
