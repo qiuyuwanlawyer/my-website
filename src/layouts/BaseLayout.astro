@@ -103,5 +103,30 @@ const navItems = [
         <a href="https://beian.gov.cn/" target="_blank" rel="noopener noreferrer">浙公网安备33010902004920号</a>
       </div>
     </footer>
+    <script is:inline>
+      document.addEventListener("click", async (event) => {
+        const button = event.target.closest(".wechat-copy-btn");
+        if (!button) return;
+        const id = button.dataset.wechat || "qiuyuwan580";
+        try {
+          await navigator.clipboard.writeText(id);
+        } catch (error) {
+          const textarea = document.createElement("textarea");
+          textarea.value = id;
+          textarea.style.position = "fixed";
+          textarea.style.opacity = "0";
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand("copy");
+          textarea.remove();
+        }
+        button.textContent = "已复制 ✓";
+        button.classList.add("is-copied");
+        window.setTimeout(() => {
+          button.textContent = "复制微信号";
+          button.classList.remove("is-copied");
+        }, 2000);
+      });
+    </script>
   </body>
 </html>

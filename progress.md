@@ -1,5 +1,149 @@
 # 项目进度记录
 
+## 2026-07-23：首页形象照更新与照片画廊（阶段 3C）
+
+- **状态：** complete
+- **完成内容：**
+  - 将 UI/UX Pro Max 技能包（7 个 skill）安装到 Claude Code 全局目录 `~/.claude/skills/`，每个 skill 的 `SKILL.md` 均验证存在；与此前 Codex 目录的安装互不影响。
+  - 将 `~/Downloads/邱先生_修好-6/` 的 6 张形象照用 `sips` 压缩至网页适用尺寸（单张 145–281KB，总计约 35MB → 1.2MB），输出到 `public/images/portraits/`。
+  - 首屏 portrait-card 形象照替换为深炭灰背景胸像 `portrait-hero-charcoal.jpg`，与深海蓝 hero 融合；`about` 页继续引用原 `profile-portrait.png`，未受影响。
+  - 首页在「最新专业文章」与「访谈视频」之间新增「执业形象」画廊版块：深海蓝底 + 金色 eyebrow + 1px 半透白细边框卡片，桌面端 12 列网格（亮灰全身 4 列 + 深棕坐姿横版 8 列；窗景全身 / 深蓝特写 / 暖调半身三张竖版并排），悬停金色描边与轻微放大。
+  - 移动端专项审查与优化：两列马赛克布局，横版全宽开篇；竖版格子 3:4 裁切 + `object-position: center 22%` 聚焦上半身；格子顺序按影调与景别交替（亮灰全身 + 深蓝特写 / 窗景全身 + 暖调半身）；画廊标题区改为纵向堆叠。
+  - 画廊图片全部懒加载并带 width/height 属性；`prefers-reduced-motion` 已由全局规则覆盖。
+- **验证：**
+  - `npm run build` 通过，共生成 29 个页面。
+  - Playwright + 本机缓存 Chromium 截图检查：桌面端 1440px 与移动端 375px 均无横向溢出（scrollWidth − clientWidth = 0）。
+  - 移动端画廊 5 格 DOM 实测位置与视觉顺序符合设计；各格脸部完整无裁切。
+  - 6 张照片在首页各出现一次；构建产物中引用与文件一一对应。
+- **涉及文件：**
+  - `src/pages/index.astro`（hero 图片替换 + 画廊版块）
+  - `src/styles/global.css`（画廊桌面端样式 + 760px 移动端规则）
+  - `public/images/portraits/`（新增 6 张压缩照片）
+  - `task_plan.md`、`progress.md`（台账）
+
+### 本轮异常记录
+
+| 时间 | 问题 | 次数 | 处理 |
+|---|---|---|---|
+| 2026-07-23 | 图像查看工具对源照片渲染出与文件真实内容不符的画面（疑似缓存污染） | 1 | 通过浏览器截图对照 + Playwright canvas 像素级采样确认文件真实内容（深炭灰胸像、亮灰全身、深棕坐姿横版、窗景全身、深蓝特写、暖调半身），据此重命名文件并修正全部 alt 文案；排版决策改以像素采样与页面截图为准。 |
+| 2026-07-23 | 首次画廊截图中第 5 格空白 | 1 | 定位为懒加载图片在滚动截图时尚未完成加载的竞态，非代码问题；截图脚本改为滚动触发 + 等待全部图片解码后再捕获，复截正常。 |
+| 2026-07-23 | 图片查看时在素材目录产生 `.md` 伴生缓存文件并被构建拷贝 | 1 | 已从 `public/images/portraits/` 与 `dist/` 清除并重新构建；后续查看该目录图片后应检查并清理。 |
+
+### 待用户确认
+
+- 空文件夹「衣领修饰自然一些 白色衬衫很明显翘起来,」内无照片，如还有第 7 张（衣领修饰版）可随时补充，画廊可扩展。
+- 本轮修改尚未提交 git，是否提交并推送 GitHub 由用户决定。
+
+## 2026-07-23：首图更换、首页照片增至 7 处与 impeccable 全量审查（阶段 3D）
+
+- **状态：** complete
+- **完成内容：**
+  - 删除画廊标题下说明文字「影棚正装与商务场景两组造型，2026 年正式形象照」；删除首屏形象照上的 figcaption 标题框「邱煜完律师企业经营风险法律服务」。
+  - 首屏 portrait-card 更换为 `portrait-hero-desk.jpg`（源文件 DSC08472.jpg，深棕背景坐姿照，1600×1066）。
+  - 首页新增「关于邱煜完律师」引导条（about-teaser）：左侧同一张坐姿照的宽幅横版裁切 + 右侧 ABOUT eyebrow、标题、简介与指向 about 页的链接，位于画廊与访谈视频之间。照片布局总计 7 处：首屏 1 + 画廊 5 + 引导条 1，6 张素材中坐姿照以两种裁切复用一次，其余各用一次。
+  - 执行 impeccable skill 全量审查（critique 流程，slug：`src-pages-index-astro`）：Assessment B 由检测子代理完成（CLI 扫描 dist/index.html + live-server 双端浏览器注入，19 条反模式、37 个覆盖标注）；Assessment A 子代理超时中断后按 fallback 由主会话完成（Nielsen 十启发式打分 31/40，Good）。
+  - 审查快照已持久化至 `.impeccable/critique/2026-07-23T04-56-00Z__src-pages-index-astro.md`（本 slug 首条基线，无历史趋势）。
+- **审查结论摘要（详见快照）：**
+  - P1 ×1：移动端微信联系路径断裂（手机用户无法扫同屏二维码），建议移动端改为「复制微信号」。
+  - P2 ×2：移动端文章区 9 张卡片堆叠约 2.9 屏偏长；「查看全部」触控目标 64×27px 低于 44pt 建议。
+  - P3 ×2：qr-card 1px 边框 + 64px 模糊阴影并存的「幽灵卡」模式；首屏移动端 1314px（1.7 屏）偏高。
+  - 反模式 19 条多数判定为误报（深色卡片内白字被误算为米色底对比、海洋蓝渐变属已承诺品牌资产等）。
+- **验证：**
+  - `npm run build` 通过，共 29 个页面；双端（1440px / 375px）无横向溢出。
+  - 照片引用核对：hero-desk ×2（首屏 + 引导条），其余 5 张各 ×1；画廊 5 格与引导条在双端渲染正常。
+- **涉及文件：**
+  - `src/pages/index.astro`（hero 换图 + 删 figcaption + 删画廊说明 + 新增 about-teaser）
+  - `src/styles/global.css`（about-teaser 桌面与 760px 移动端样式）
+  - `.impeccable/critique/`（新增审查快照）
+  - `task_plan.md`、`progress.md`（台账）
+
+### 本轮异常记录
+
+| 时间 | 问题 | 次数 | 处理 |
+|---|---|---|---|
+| 2026-07-23 | Assessment A 设计审查子代理超时中断（600s 无进展） | 1 | 按 critique 流程 fallback 由主会话完成 Assessment A 并合成报告；其中断前已完成全部 DOM 实测数据，被直接采用。 |
+| 2026-07-23 | 审查快照首次写入时目录不存在 | 1 | critique-storage.mjs 自动创建 `.impeccable/critique/`，写入成功。 |
+
+### 待用户确认
+
+- 是否实施 P1（移动端「复制微信号」替代扫码）与 P2（移动端文章区收敛、「查看全部」加大触控区）。
+- 本轮所有修改尚未提交 git，提交与推送由用户决定。
+
+## 2026-07-23：撤除画廊、照片穿插各版面与 P1 移动端微信修复（阶段 3E）
+
+- **状态：** complete
+- **完成内容：**
+  - 用户决策：单独的照片画廊「太娱乐化」，撤除「执业形象」版块，照片改为网页素材穿插到各版面；P1 立即修复，微信号确认为 `qiuyuwan580`。
+  - P1 修复：`BaseLayout.astro` 加入全站点击委托复制脚本（`navigator.clipboard` + `execCommand` 回退）；首页 qr-card 与 products 页 proposal-contact 新增 `.wechat-id-row`（微信号 + 复制按钮），≤760px 显示并同时隐藏二维码图片；按钮 44px 高，点击后 2 秒「已复制 ✓」反馈。
+  - 照片重新分布（6 张各出现一次，无画廊）：首屏坐姿照不变；首页「关于我」引导条由坐姿照改为暖调半身照；首页播客卡改为左文案 + 右通栏灰色全身照（复用视频卡语言）；播客页首屏大标题右侧新增深蓝特写竖版卡；关于页首屏右侧新增炭灰胸像；关于页「我的故事」左列新增窗景全身照。
+  - 撤除画廊版块全部 HTML 与 CSS（含 760px 移动端规则）；清理 figcaption 残留样式，home-experiment 草稿页同步移除 figcaption 标记并加上复制行。
+  - 新增共用构件 `.page-hero-portrait`（280px 宽 3:4 竖版卡、1px 半透白边框、底部硬阴影），移动端降为 16:10 通栏；播客卡照片移动端隐藏；故事照移动端 4:3。
+- **验证：**
+  - `npm run build` 通过，共 29 页。
+  - Playwright 双端实测 7 组页面×视口横向溢出全为 0；6 张照片全部正常加载且可见性符合设计（移动端该隐藏的已隐藏）。
+  - 复制按钮实测：点击后剪贴板内容为 `qiuyuwan580`，按钮显示「已复制 ✓」。
+  - 截图逐张目检：桌面播客页/关于页首屏右侧照片卡、首页播客卡与引导条、移动端 qr 复制卡、三个移动端照片位均构图正常、脸部无裁切。
+- **涉及文件：**
+  - `src/layouts/BaseLayout.astro`（复制脚本）
+  - `src/pages/index.astro`（删画廊、引导条换照、播客卡加照、qr-card 复制行）
+  - `src/pages/podcast.astro`、`src/pages/about.astro`（首屏照片卡 + 故事照）
+  - `src/pages/products.astro`、`src/pages/home-experiment.astro`（联系区复制行 / 清理）
+  - `src/styles/global.css`（删画廊与 figcaption 样式；新增 page-hero-portrait、podcast-intro-photo、story-portrait、wechat-id-row 及移动端规则）
+  - `task_plan.md`、`progress.md`（台账）
+
+### 本轮异常记录
+
+| 时间 | 问题 | 次数 | 处理 |
+|---|---|---|---|
+| 2026-07-23 | 竖版照片替换横版后卡片被固有比例撑高（引导条 460→843px、播客卡 480→752px） | 1 | 照片容器改为 `position:relative` + 图片 `position:absolute; inset:0` 填充，卡片高度回归文案主导；移动端容器改 aspect-ratio 约束。已记入 task_plan 阶段 3E 设计说明。 |
+| 2026-07-23 | 复验时测得旧布局（CSS 未生效） | 1 | 定位为 4321 端口是 preview 服务器在 serve 旧 dist，而 CSS 修改发生在构建之后；重新构建并重启 preview 后复验通过。教训：改动后先构建再验证。 |
+
+### 待用户确认
+
+- P2 两项（移动端文章区收敛、「查看全部」触控目标）是否实施。
+- 本轮修改尚未提交 git，提交与推送由用户决定。
+
+## 2026-07-23：照片布局收敛，按用户逐条反馈调整（阶段 3F）
+
+- **状态：** complete
+- **完成内容：**
+  - 关于页「我的故事」删除窗景照片与 `.story-portrait` 全部 CSS。
+  - 关于页首屏右侧照片由炭灰胸像换为修饰版窗景照：源文件「大小眼修饰 眼镜片反光去掉.jpg」（3072×4608）用 sips 压缩为 800×1200、145KB，直接覆盖 `public/images/portraits/portrait-full-window.jpg`，页面引用路径不变。
+  - 播客页首屏恢复为无照片的原始版本；`.podcast-page-hero` 从 grid 布局规则中移除。
+  - 首页「关于我」引导条照片换回横版坐姿照 `portrait-hero-desk.jpg`，图片裁切焦点重置为 center。
+  - 首页播客卡恢复为无照片版本；`.podcast-intro` 回到 block 布局，`.podcast-intro-photo` 样式与移动端隐藏规则删除。
+- **验证：**
+  - `npm run build` 通过，共 29 页；preview 服务器已重启为最新构建。
+  - Playwright 双端 6 组页面×视口横向溢出全为 0；三处删除位 DOM 计数均为 0；关于页首屏 img src 确认为新文件。
+- **当前全站照片分布（3 处、2 张素材）：**
+  - 首页首屏坐姿照（竖版紧裁）+ 首页引导条坐姿照（横版宽裁）；关于页首屏右侧修饰版窗景全身照。
+  - 炭灰胸像、深蓝特写、灰色全身、暖调半身四张素材保留在 `public/images/portraits/` 备用，未被引用。
+- **涉及文件：**
+  - `src/pages/about.astro`、`src/pages/podcast.astro`、`src/pages/index.astro`
+  - `src/styles/global.css`（移除 story-portrait / podcast-intro-photo 规则及对应移动端规则）
+  - `public/images/portraits/portrait-full-window.jpg`（内容替换为修饰版）
+  - `task_plan.md`、`progress.md`（台账）
+
+### 待用户确认
+
+- 本轮修改尚未提交 git，提交与推送由用户决定。
+
+## 2026-07-23：手机端两处细节修复（阶段 3F 补丁）
+
+- **状态：** complete
+- **完成内容：**
+  - 首屏业务标签手机端由「3+1」断行改为「2×2」均匀排布：金点由 `<i>` 元素改为 `span + span::before` 伪元素（桌面端观感不变），≤760px 时 kicker 改 `grid-template-columns: repeat(2, auto)` + `justify-content: space-between`，第 3 项（行首）的伪元素金点隐藏。index 与 home-experiment 草稿页标记同步更新。
+  - 关于页首屏照片手机端裁切焦点由 `center 22%` 上调至 `center 10%`，解决头顶头发被裁问题；像素扫描确认头发起点在源图 13% 处，新窗口从 5.8% 起完整包含。
+  - 预览服务器改为 `--host` 模式重启，手机可通过局域网 http://192.168.12.199:4321 访问。
+- **验证：**
+  - 构建 29 页通过；移动端 kicker 四项坐标实测 2×2（x=29/252，y=184/216），金点第 2 项保留、第 3 项隐藏；桌面端 kicker 高度 42px 单行不变。
+  - 双端首页横向溢出均为 0。
+- **涉及文件：** `src/pages/index.astro`、`src/pages/home-experiment.astro`、`src/styles/global.css`、`progress.md`、`task_plan.md`。
+
+### 待用户确认
+
+- 本轮修改尚未提交 git，提交与推送由用户决定。
+
 ## 2026-07-13：建立持续管理机制
 
 ### 阶段 1：建立项目管理基线
