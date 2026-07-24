@@ -499,14 +499,28 @@ li {
 @media (max-width: 760px) {
   .refined-kicker {
     display: grid;
-    grid-template-columns: repeat(2, auto);
-    justify-content: space-between;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 18px;
     row-gap: 10px;
     width: 100%;
   }
 
-  .refined-kicker span:nth-child(3)::before {
-    display: none;
+  .refined-kicker span {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+  }
+
+  .refined-kicker span::before {
+    display: inline-block;
+    flex: 0 0 auto;
+    width: 5px;
+    height: 5px;
+    margin-right: 9px;
+    background: var(--gold);
+    border-radius: 999px;
+    box-shadow: 0 0 0 4px rgba(240, 195, 59, 0.18);
+    content: "";
   }
 
   .wechat-id-row {
