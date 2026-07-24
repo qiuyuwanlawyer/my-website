@@ -431,6 +431,71 @@ li {
   display: none;
 }
 
+/* Compact navigation fallback for embedded mobile browsers that report a
+   wider layout viewport than the physical screen. */
+@media (max-width: 900px) {
+  .site-header {
+    width: min(100% - 32px, 1320px);
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .mobile-nav {
+    position: relative;
+    display: block;
+  }
+
+  .mobile-nav summary {
+    display: grid;
+    min-width: 48px;
+    min-height: 44px;
+    padding: 0 12px;
+    place-items: center;
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 800;
+    list-style: none;
+  }
+
+  .mobile-nav summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .mobile-nav nav {
+    position: absolute;
+    top: 54px;
+    right: 0;
+    display: grid;
+    width: min(78vw, 280px);
+    padding: 8px;
+    color: var(--deep);
+    border: 1px solid rgba(16, 34, 61, 0.16);
+    background: #fffdf8;
+    box-shadow: 0 8px 0 rgba(4, 22, 42, 0.16);
+  }
+
+  .mobile-nav nav a {
+    min-height: 46px;
+    padding: 11px 13px;
+    border-bottom: 1px solid rgba(16, 34, 61, 0.1);
+    font-weight: 800;
+    white-space: nowrap;
+  }
+
+  .mobile-nav nav a:last-child {
+    border-bottom: 0;
+  }
+
+  .mobile-nav nav a[aria-current="page"] {
+    color: var(--deep-2);
+    background: rgba(31, 127, 165, 0.1);
+  }
+}
+
 @media (max-width: 760px) {
   .refined-kicker {
     display: grid;
@@ -3014,62 +3079,6 @@ td {
 
   .brand strong {
     font-size: 20px;
-  }
-
-  .site-nav {
-    display: none;
-  }
-
-  .mobile-nav {
-    position: relative;
-    display: block;
-  }
-
-  .mobile-nav summary {
-    display: grid;
-    min-width: 48px;
-    min-height: 44px;
-    padding: 0 12px;
-    place-items: center;
-    color: white;
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 800;
-    list-style: none;
-  }
-
-  .mobile-nav summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .mobile-nav nav {
-    position: absolute;
-    top: 54px;
-    right: 0;
-    display: grid;
-    width: min(78vw, 280px);
-    padding: 8px;
-    color: var(--deep);
-    border: 1px solid rgba(16, 34, 61, 0.16);
-    background: #fffdf8;
-    box-shadow: 0 8px 0 rgba(4, 22, 42, 0.16);
-  }
-
-  .mobile-nav nav a {
-    min-height: 46px;
-    padding: 11px 13px;
-    border-bottom: 1px solid rgba(16, 34, 61, 0.1);
-    font-weight: 800;
-  }
-
-  .mobile-nav nav a:last-child {
-    border-bottom: 0;
-  }
-
-  .mobile-nav nav a[aria-current="page"] {
-    color: var(--deep-2);
-    background: rgba(31, 127, 165, 0.1);
   }
 
   .home-hero {
