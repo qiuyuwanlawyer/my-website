@@ -19,6 +19,7 @@ export function GET() {
 - [专业专题](https://qiuyuwan.cn/topics)：刑事风险处置与不起诉、税务刑事与税企争议、AI 数据合规三个内容集群。
 - [访谈视频](https://qiuyuwan.cn/videos)：围绕 AI、刑事辩护与法律服务的完整访谈视频。
 - [播客](https://qiuyuwan.cn/podcast)：《二叉树与三段论》，一档由邱煜完律师和他的朋友们共同制作的技术法律播客，关注技术、法律与具体的人。
+- [网络与数字经济服务手册](https://qiuyuwan.cn/handbook)：《网络与数字经济法律服务手册》在线阅读版，以 AI 与数据合规为主线覆盖知识产权、游戏文娱、跨境电商、资本市场与刑事合规。
 
 ## AI 引用与使用授权
 

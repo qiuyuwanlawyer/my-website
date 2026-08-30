@@ -1,0 +1,454 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const TOTAL = 24;
+const MOB_TOTAL = 48;
+const pages = Array.from({ length: TOTAL }, (_, i) => i + 1);
+const mobilePages = Array.from({ length: MOB_TOTAL }, (_, i) => i + 1);
+---
+<BaseLayout
+  title="网络与数字经济法律服务手册 | 邱煜完律师"
+  description="《网络与数字经济法律服务手册》在线阅读：AI 与数据合规为主线的网络与数字经济法律服务全景手册。"
+  bodyClass="handbook-page"
+>
+  <section class="page-hero handbook-hero">
+    <p class="eyebrow">HANDBOOK · 专业手册专栏</p>
+    <h1>网络与数字经济法律服务手册</h1>
+    <p>
+      以 AI 与数据合规为主线，覆盖知识产权、游戏文娱、跨境电商、资本市场、财富管理与刑事合规的一体化法律服务手册。原版 48 页，在线阅读。
+    </p>
+    <div class="handbook-meta">
+      <span>48 页 · 电脑对页 / 手机单页</span>
+      <span>原版设计 · 在线翻阅</span>
+      <span>网络与数字经济专业委员会 编</span>
+    </div>
+  </section>
+
+  <section class="hb-reader" aria-label="手册在线阅读">
+    <div class="hb-stage-wrap">
+      <button type="button" class="hb-nav hb-prev" id="hb-prev" aria-label="上一页">‹</button>
+      <figure class="hb-stage" id="hb-stage">
+        <img
+          id="hb-img"
+          src="/handbook-demo/p1.jpg"
+          alt="《网络与数字经济法律服务手册》第 1 页"
+          width="1600"
+          height="1094"
+          decoding="async"
+        />
+        <figcaption class="hb-hint">点击页面可放大 · 左右滑动翻页</figcaption>
+      </figure>
+      <button type="button" class="hb-nav hb-next" id="hb-next" aria-label="下一页">›</button>
+    </div>
+
+    <div class="hb-toolbar">
+      <span class="hb-counter" id="hb-counter">01 / 24</span>
+      <div class="hb-strip hb-strip-desk" id="hb-strip-desk" aria-label="对页缩略图（桌面版）">
+        {pages.map((n) => (
+          <button
+            type="button"
+            class:list={["hb-thumb", n === 1 && "is-active"]}
+            data-page={n}
+            aria-label={`跳到第 ${n} 对页`}
+          >
+            <img src={`/handbook-demo/t${n}.jpg`} alt="" width="180" height="123" loading="lazy" decoding="async" />
+          </button>
+        ))}
+      </div>
+      <div class="hb-strip hb-strip-mob" id="hb-strip-mob" aria-label="单页缩略图（移动版）">
+        {mobilePages.map((n) => (
+          <button
+            type="button"
+            class:list={["hb-thumb", n === 1 && "is-active"]}
+            data-page={n}
+            aria-label={`跳到第 ${n} 页`}
+          >
+            <img src={`/handbook-demo/mt${n}.jpg`} alt="" width="140" height="190" loading="lazy" decoding="async" />
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section handbook-cta-section">
+    <div class="handbook-cta">
+      <div class="handbook-cta-copy">
+        <p class="eyebrow">CONSULT</p>
+        <h2>读到与你业务相关的风险点？</h2>
+        <p>
+          手册呈现的是体系与边界，落到你的具体业务，还需要结合数据流、合同与监管口径逐项判断。欢迎添加微信，简要说明场景，先聊清楚问题所在。
+        </p>
+      </div>
+      <div class="qr-card">
+        <div class="qr-image">
+          <img src="/images/wechat-qr-navy.png" alt="邱煜完律师微信二维码" />
+        </div>
+        <div>
+          <strong>微信咨询</strong>
+          <span class="qr-desc">扫码添加，简要说明数字业务与法律问题节点。</span>
+          <span class="wechat-id-row">
+            <span>微信号 <b>qiuyuwan580</b></span>
+            <button type="button" class="wechat-copy-btn" data-wechat="qiuyuwan580">复制微信号</button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <p class="handbook-note">
+      手册由北京天驰君泰（杭州）律师事务所网络与数字经济专业委员会编制，本页为原版完整呈现；内容仅供参考，不构成针对具体事项的法律意见。
+    </p>
+  </section>
+
+  <div class="hb-lightbox" id="hb-lightbox" hidden>
+    <img id="hb-lightbox-img" src="/handbook-demo/p1.jpg" alt="手册页面放大视图" />
+  </div>
+
+  <script>
+    const DESK_TOTAL = 24;
+    const MOB_TOTAL = 48;
+    const pad = (n: number) => String(n).padStart(2, "0");
+
+    const mq = window.matchMedia("(max-width: 760px)");
+    let mobile = mq.matches;
+
+    const img = document.getElementById("hb-img") as HTMLImageElement;
+    const counter = document.getElementById("hb-counter")!;
+    const stage = document.getElementById("hb-stage")!;
+    const lightbox = document.getElementById("hb-lightbox")!;
+    const lightboxImg = document.getElementById("hb-lightbox-img") as HTMLImageElement;
+    const deskThumbs = Array.from(document.querySelectorAll<HTMLButtonElement>("#hb-strip-desk .hb-thumb"));
+    const mobThumbs = Array.from(document.querySelectorAll<HTMLButtonElement>("#hb-strip-mob .hb-thumb"));
+
+    let deskCur = 1;
+    let mobCur = 1;
+    let busy = false;
+
+    const cur = () => (mobile ? mobCur : deskCur);
+    const total = () => (mobile ? MOB_TOTAL : DESK_TOTAL);
+    const pageSrc = (n: number) => `/handbook-demo/${mobile ? "mp" : "p"}${n}.jpg`;
+
+    const setActive = () => {
+      deskThumbs.forEach((t, i) => t.classList.toggle("is-active", !mobile && i === deskCur - 1));
+      mobThumbs.forEach((t, i) => t.classList.toggle("is-active", mobile && i === mobCur - 1));
+      (mobile ? mobThumbs : deskThumbs)[cur() - 1]?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    };
+
+    const swapImage = (n: number) => {
+      busy = true;
+      img.style.opacity = "0";
+      const loader = new Image();
+      loader.src = pageSrc(n);
+      loader.onload = () => {
+        img.src = loader.src;
+        img.alt = `《网络与数字经济法律服务手册》第 ${n} ${mobile ? "页" : "对页"}`;
+        img.style.opacity = "1";
+        busy = false;
+      };
+    };
+
+    const show = (n: number) => {
+      const next = Math.min(total(), Math.max(1, n));
+      if (mobile) mobCur = next;
+      else deskCur = next;
+      swapImage(next);
+      counter.textContent = `${pad(next)} / ${total()}`;
+      setActive();
+      [next - 1, next + 1].forEach((k) => {
+        if (k >= 1 && k <= total()) new Image().src = pageSrc(k);
+      });
+    };
+
+    const syncMode = () => {
+      if (mobile) mobCur = Math.min(MOB_TOTAL, deskCur * 2 - 1);
+      else deskCur = Math.max(1, Math.ceil(mobCur / 2));
+      swapImage(cur());
+      counter.textContent = `${pad(cur())} / ${total()}`;
+      setActive();
+    };
+
+    document.getElementById("hb-prev")!.addEventListener("click", () => show(cur() - 1));
+    document.getElementById("hb-next")!.addEventListener("click", () => show(cur() + 1));
+    [...deskThumbs, ...mobThumbs].forEach((t) =>
+      t.addEventListener("click", () => show(Number(t.dataset.page)))
+    );
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.hidden) {
+        if (e.key === "Escape") lightbox.hidden = true;
+        return;
+      }
+      if (e.key === "ArrowLeft") show(cur() - 1);
+      if (e.key === "ArrowRight") show(cur() + 1);
+    });
+    mq.addEventListener("change", syncMode);
+
+    let startX = 0;
+    let startY = 0;
+    stage.addEventListener(
+      "touchstart",
+      (e) => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      },
+      { passive: true }
+    );
+    stage.addEventListener(
+      "touchend",
+      (e) => {
+        const dx = e.changedTouches[0].clientX - startX;
+        const dy = e.changedTouches[0].clientY - startY;
+        if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy) * 1.4) {
+          show(cur() + (dx < 0 ? 1 : -1));
+        }
+      },
+      { passive: true }
+    );
+
+    stage.addEventListener("click", () => {
+      if (!busy) {
+        lightboxImg.src = pageSrc(cur());
+        lightbox.hidden = false;
+      }
+    });
+    lightbox.addEventListener("click", () => (lightbox.hidden = true));
+
+    // 移动端首访直接加载单页版，避免先闪对页图
+    if (mobile) {
+      img.src = "/handbook-demo/mp1.jpg";
+      counter.textContent = "01 / 48";
+    }
+  </script>
+
+  <style>
+    .handbook-hero .handbook-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 22px;
+      margin-top: 22px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .hb-reader {
+      background: linear-gradient(180deg, var(--deep) 0%, var(--deep-2) 100%);
+      color: var(--ink);
+      padding: 56px 20px 44px;
+    }
+
+    .hb-stage-wrap {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 56px minmax(0, 1fr) 56px;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .hb-stage {
+      margin: 0;
+      position: relative;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      cursor: zoom-in;
+      background: #fff;
+    }
+
+    .hb-stage img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transition: opacity 220ms var(--ease-out);
+    }
+
+    .hb-hint {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: -30px;
+      text-align: center;
+      font-size: 12.5px;
+      color: var(--muted);
+    }
+
+    .hb-nav {
+      width: 100%;
+      height: 72px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--ink);
+      font-size: 30px;
+      line-height: 1;
+      cursor: pointer;
+      transition: background 160ms var(--ease-out), border-color 160ms var(--ease-out);
+    }
+
+    .hb-nav:hover {
+      background: rgba(240, 195, 59, 0.16);
+      border-color: var(--gold);
+    }
+
+    .hb-toolbar {
+      max-width: 1180px;
+      margin: 40px auto 0;
+    }
+
+    .hb-counter {
+      display: block;
+      text-align: center;
+      font-size: 13px;
+      letter-spacing: 0.14em;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    .hb-strip {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 2px 10px;
+      scrollbar-width: thin;
+    }
+
+    .hb-thumb {
+      flex: 0 0 auto;
+      width: 86px;
+      padding: 0;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, 0.06);
+      cursor: pointer;
+      opacity: 0.62;
+      transition: opacity 160ms var(--ease-out), border-color 160ms var(--ease-out);
+    }
+
+    .hb-thumb img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .hb-thumb:hover {
+      opacity: 0.9;
+    }
+
+    .hb-thumb.is-active {
+      opacity: 1;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 1px var(--gold);
+    }
+
+    .handbook-cta-section {
+      padding-bottom: 64px;
+    }
+
+    .handbook-cta {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 36px;
+      align-items: center;
+      background: var(--deep);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 44px 46px;
+    }
+
+    .handbook-cta h2 {
+      margin: 6px 0 14px;
+      font-size: 28px;
+      color: var(--ink);
+    }
+
+    .handbook-cta .qr-card {
+      position: static;
+      width: 100%;
+      max-width: 360px;
+      justify-self: end;
+    }
+
+    .handbook-cta .qr-card span {
+      color: var(--muted);
+    }
+
+    .handbook-cta p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .handbook-note {
+      max-width: 1180px;
+      margin: 18px auto 0;
+      font-size: 13px;
+      color: var(--text-soft);
+    }
+
+    .hb-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 90;
+      background: rgba(3, 15, 30, 0.92);
+      overflow: auto;
+      cursor: zoom-out;
+      text-align: center;
+      padding: 24px 12px;
+    }
+
+    .hb-lightbox img {
+      max-width: 1400px;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--line);
+    }
+
+    .hb-strip-mob {
+      display: none;
+    }
+
+    @media (max-width: 760px) {
+      .hb-reader {
+        padding: 40px 14px 36px;
+      }
+
+      .hb-stage-wrap {
+        grid-template-columns: 44px minmax(0, 1fr) 44px;
+        gap: 8px;
+      }
+
+      .hb-nav {
+        height: 56px;
+        font-size: 24px;
+      }
+
+      .hb-hint {
+        bottom: -24px;
+        font-size: 11.5px;
+      }
+
+      .hb-strip-desk {
+        display: none;
+      }
+
+      .hb-strip-mob {
+        display: flex;
+      }
+
+      .hb-thumb {
+        width: 60px;
+      }
+
+      .handbook-cta {
+        grid-template-columns: 1fr;
+        padding: 30px 22px;
+      }
+
+      .handbook-cta .qr-card {
+        justify-self: start;
+      }
+
+      .hb-lightbox img {
+        width: auto;
+        max-width: none;
+        height: 94vh;
+      }
+    }
+  </style>
+</BaseLayout>

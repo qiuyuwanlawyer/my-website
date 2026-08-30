@@ -1,7 +1,7 @@
 const articleModules = import.meta.glob("../content/articles/*.md", { eager: true });
 import { topics } from "../data/topics";
 
-const staticPaths = ["", "about", "products", "articles", "topics", "videos", "podcast", ...topics.map((topic) => `topics/${topic.slug}`)];
+const staticPaths = ["", "about", "products", "articles", "topics", "videos", "podcast", "handbook", ...topics.map((topic) => `topics/${topic.slug}`)];
 
 function escapeXml(value: string) {
   return value.replace(/[<>&'\"]/g, (character) => ({
