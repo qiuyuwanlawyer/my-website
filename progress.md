@@ -1,5 +1,19 @@
 # 项目进度记录
 
+## 2026-09-04：境内 CDN 迁移完成——全站秒开（阶段 5A 主体）
+
+- **状态：** complete（主链路）；缓存规则重建与 COS 自动同步待补
+- **最终架构：** DNSPod（@ CNAME → qiuyuwan.cn.eo.dnse1.com）→ EdgeOne 个人版（中国大陆可用区，CNAME 接入，zone-3uif2ps7a5oy）→ 源站 COS 桶 qiuyuwan-site-1448378287（ap-shanghai，**静态网站端点** cos-website.ap-shanghai.myqcloud.com，公有读私有写）→ 内容源仍是 GitHub 仓库构建产物。
+- **部署排障过程（历时两天，重要）：**
+  1. 首次接入用「DNSPod 托管接入 + GitHub 源站」，域名卡在「部署中」超过一天，期间全站解析中断；
+  2. 自助诊断定位：大陆节点回源 GitHub Pages 超时（GitHub 在大陆不可达）；
+  3. 客服核实深层原因：**EdgeOne 国际站存在同名域名的失效记录**，占住调度资源——删除国际站残留后解除锁定；
+  4. 重建站点：CNAME 接入 + COS 源站，部署数分钟完成；
+  5. 收尾修复：COS 桶改公有读私有写（私有桶回源 403）；EO 申请免费证书（TrustAsia DV，有效期至 2026-11-30，自动续期）；源站域名从「默认域名」改为「静态网站域名」（否则目录页 403/404——cos 默认端点不做 index 解析）。
+- **上线实测（2026-09-04）：** 首页 TTFB 0.28s；about/products/articles/videos/handbook/topics 全部 200（<0.7s）；4MB 封面 0.64s；视频首 1MB 0.22s、均速 4.7MB/s；43 期视频与手册专栏在线正常。对比迁移前 GitHub 直连（均速约 0.1–0.2MB/s、大图十几秒），提速约 20–50 倍。
+- **注意：更新流程变化**——push 到 GitHub 不再直接更新线上！线上内容来自 COS 桶，push 后需把最新 dist 同步到桶（控制台拖拽或后续加 GitHub Actions 自动同步）。
+- **涉及文件：** 无源码改动；控制台配置（EdgeOne/COS/DNSPod）。
+
 ## 2026-08-30：网络与数字经济服务手册专栏上线（阶段 3H）
 
 - **状态：** complete

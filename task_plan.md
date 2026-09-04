@@ -175,6 +175,18 @@
 - 结果：提交 `b303b5f` 推送上线，线上 https://qiuyuwan.cn/handbook/ 验证 200，导航入口已生效。
 - **状态：** complete
 
+### 阶段 5A：境内 CDN 迁移（EdgeOne + COS，2026-09-02～04）
+
+- 背景：GitHub Pages 境外节点导致国内访问极慢（图片十几秒、视频难起播）。
+- 最终架构：**DNS（DNSPod）→ EdgeOne 个人版（中国大陆可用区，CNAME 接入）→ 源站 COS 桶 `qiuyuwan-site-1448378287`（ap-shanghai，静态网站端点 cos-website，公有读私有写）→ 内容由 GitHub 仓库构建**。
+- 排障全过程与配置细节见 `progress.md` 2026-09-02/04 条目；关键教训见 `findings.md`。
+- 结果：首页 TTFB 0.28s、全页面 200、视频均速 4.7MB/s（此前 GitHub 直连约 0.1–0.2MB/s），全站秒开。
+- 待办：
+  - [ ] EdgeOne 规则引擎重建缓存规则（「网站加速」模板，IF1 改为文件后缀 jpg png webp mp4 css js svg、自定义 30 天、强制缓存开）
+  - [ ] GitHub Actions 增加「构建后同步 dist 到 COS」步骤（需用户提供腾讯云 API 密钥存入仓库 Secrets）
+  - [ ] 手动同步期间的临时流程：每次 push 后由我本地构建 + coscmd/控制台上传 dist 到桶
+- **状态：** in_progress（主链路已上线，缓存规则与自动同步待补）
+
 ### 阶段 4A：内容质量修复（2026-08-29 审计产出）
 
 - [x] 4 处实质性法律错误经元典检索核实后修订（依据见 `findings.md` 2026-08-29 检索核实一节）：① `when-tax-audit-needs-lawyer.md` 数额标准改为虚开 10 万（或税款损失 5 万）、逃税 10 万/50 万并标注条文出处；② `zhang-mouqiang-innocent-case.md` 4 处"指导案例"改"典型案例"并改写约束力表述，"死刑复核"改"有罪核准"；③ `construction-interpretation-ii-review.md` 比例法公式改为"占比 × 固定总价"并补全条文参照口径；④ `electronic-signature-validity.md` 删 3 处编辑备注、修 2 处断表、补"二、"序号、图片 02/03 归位
