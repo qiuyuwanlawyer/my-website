@@ -1,5 +1,18 @@
 # 项目进度记录
 
+## 2026-09-05：播客节目列表 + 全站咨询条上线（含二维码修复与 COS 同步流程打通）
+
+- **状态：** complete
+- **完成内容（均经用户可视化审核后落地）：**
+  - 播客页新增「最近节目」列表（真实 5 期 EP01–EP05，纯展示无外链——用户确认播客收听主要在手机端，不设电脑端小宇宙外链按钮）；页面其余部分（封面截图等）保持原样。
+  - 文章详情页（免责声明后）、关于页尾、首页尾（播客横幅后）统一加入「如需联系我们」微信咨询条（深蓝渐变横条 + 现有二维码/复制号组件），文案经用户改定为「如需联系我们。请简要说明……」。
+  - 修复文章筛选失效 P0 bug（`.article-row` 的 display:grid 覆盖 `[hidden]`）；修复复制成功态白底白字不可读。
+  - 修复二维码在咨询条内溢出裁切（`.contact-band img` 通用 138px 规则覆盖 `.qr-image img`，新增 `.contact-band .qr-image img` 高优先级规则恢复 104×104 cover）。
+- **COS 同步流程打通：** 用户提供腾讯云 API 密钥（已存本机 `~/.cos.conf`，权限 600，不入库）；coscmd 全量同步 dist→桶（256 文件）；EdgeOne 缓存刷新改用 OpenAPI（teo CreatePurgeTask，已验证可用，本方案 URL 刷新需含带斜杠变体，必要时用 purge_all）。
+- **验证：** 线上五页（首页/播客/关于/文章/视频/手册）内容全部更新到位；二维码完整可扫。
+- **涉及文件：** `src/pages/podcast.astro`、`src/pages/articles/[slug].astro`、`src/pages/about.astro`、`src/pages/index.astro`、`src/styles/global.css`；另有 demo 页三个（`src/pages/demo/`，noindex，未同步上线仅本地预览，可保留供日后参考或删除）。
+- **提交：** `ea01375`（内容）、`42a413f`（二维码裁切一）、`649ee06`（二维码裁切二）。
+
 ## 2026-09-04：境内 CDN 迁移完成——全站秒开（阶段 5A 主体）
 
 - **状态：** complete（主链路）；缓存规则重建与 COS 自动同步待补
