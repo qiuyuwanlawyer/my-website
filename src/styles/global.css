@@ -412,7 +412,7 @@ li {
 .qr-image img {
   width: 104px;
   height: 104px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .qr-card strong {
@@ -1221,6 +1221,12 @@ td {
   width: 138px;
   height: 138px;
   background: white;
+}
+
+.contact-band .qr-image img {
+  width: 104px;
+  height: 104px;
+  object-fit: cover;
 }
 
 .article-tools {
