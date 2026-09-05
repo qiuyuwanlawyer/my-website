@@ -412,7 +412,7 @@ li {
 .qr-image img {
   width: 104px;
   height: 104px;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .qr-card strong {
