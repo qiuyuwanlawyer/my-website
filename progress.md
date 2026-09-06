@@ -1,5 +1,15 @@
 # 项目进度记录
 
+## 2026-09-06：全站 GEO 改造上线 + 三搜索引擎收录打通（阶段 5B，commit `f778aea`）
+
+- **状态：** complete（挂起：备案反馈后全量推送、GSC sitemap 状态监测）
+- **站内改造（经用户逐项审核）：** BaseLayout 全站 OG/Twitter 标签 + `baidu-site-verification`；`scripts/make-og.mjs` 生成 1200×630 og-default.png（米色底须与 wordmark 底色 #f7f3eb 一致才无缝）；4 篇高意图文章（税务稽查/税务刑事红线/进销项虚开量刑/电子签章）FAQ frontmatter → 模板统一渲染区块 + FAQPage schema；sitemap 26 URL 全带 lastmod；新增 `llms-full.txt`（15 篇全文 263KB，?raw glob 实现）。
+- **部署：** coscmd（`~/Library/Python/3.9/bin/coscmd`，不在 PATH）上传 258 文件 + EdgeOne purge_all（`scripts/purge_eo_sdk.py`，官方 SDK 签名——手写 TC3 失败弃用）。线上逐项验证通过（境外 WebFetch + Googlebot/GPTBot UA 均 200）。
+- **三引擎收录：** 百度（实名认证排障后添加成功 → HTML 标签验证 → API 推送接口存 `.env` 并首推 7 URL，remain 3）；Google（网域资源 → DNSPod `@` TXT 验证，与 CNAME 共存，四大公共 DNS 实测生效 → sitemap 已提交，初始「无法抓取」等自动重抓）；Bing（GSC 一键导入 → sitemap 已提交）。
+- **用户操作记录：** 百度账号实名认证、备案号已走反馈通道（填主体备案号提配额）、GSC/Bing 账号授权与 sitemap 提交。
+- **关键文件：** `GEO_ACTION_PLAN.md`（GEO 执行细目与分工）、`scripts/baidu-push.mjs`（`node --env-file=.env` 运行）、`scripts/purge_eo_sdk.py`、`scripts/make-og.mjs`。
+- **下一阶段：** 阶段 6 内容分发（知乎/公众号），等用户确认启动。
+
 ## 2026-09-05：播客节目列表 + 全站咨询条上线（含二维码修复与 COS 同步流程打通）
 
 - **状态：** complete

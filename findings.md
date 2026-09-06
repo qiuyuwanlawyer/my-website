@@ -21,7 +21,29 @@
 - 2026-07-11 的项目构建验证已通过，共生成 29 个页面。
 - 首页播客截图曾因裁切不完整影响体验，现已从首页移除；播客专页保留完整封面。
 - 视频文件体积较大，已设置为按需加载；若后续追求更快访问速度，应提供或制作压缩版视频。
-- 尚缺正式对外联系方式、ICP备案号及可公开验证的资质材料；这些是提升信任感与上线完整度的主要缺口。
+- 尚缺正式对外联系方式、ICP备案号及可公开验证的资质材料；这些是提升信任感与上线完整度的主要缺口。（2026-09-06 更新：备案号与微信咨询入口已上线，此缺口已闭合）
+
+## GEO 与搜索引擎收录（2026-09-06）
+
+### 诊断结论（立项依据）
+
+- 国内 AI 搜索（豆包/元宝/Kimi/文心等）本质是「RAG over 传统搜索索引 + 内容平台生态」，独立个人站在其引用池中权重极低；引用主力是微信公众号、知乎、百家号、头条号。**内容分发比站内技术配置更决定性。**
+- 站内技术底子（robots.txt 放行全部 AI 爬虫、llms.txt、JSON-LD、备案、国内 CDN）在动工前已齐备，瓶颈在收录浅与实体缺失：Bing 将品牌词「邱煜完律师」拆为「邱」字，返回字典/姓氏内容——搜索引擎不认识该人名实体。
+- 市面「GEO 4 小时搞定」类教程夸大收益；llms.txt 实为 Answer.AI 2024 社区规范（非 Anthropic），主流 AI 无官方确认读取；「robots.txt 不写规则=不允许」是错误说法（规范默认允许）。
+
+### 平台机制与实操经验
+
+- 百度站长：添加网站要求账号已实名认证（未实名直接「添加失败」）；新站普通收录配额可为 0，填主体备案号提额（备案数据同步有时滞，可走反馈中心）；API 提交与手动提交共享配额，sitemap 配额独立；推送接口 `site` 参数实测可带 `https://` 前缀（返回 success 计数）。token 存 `.env`（已 gitignore），脚本经 `node --env-file=.env` 读取。
+- 百度/GSC 验证类「失败」多为瞬时或初始状态：百度「无法连接服务器」重试即成；GSC sitemap「无法抓取」为提交后初始态，站点实际境内外均可达，等自动重抓即可。
+- DNSPod `@` 主机 CNAME 与 TXT 可共存（加 TXT 弹冲突提醒，直接确定保存），实测 DNSPod/阿里/Google/Cloudflare 四大公共 DNS 均正常返回 TXT——无需开启 CNAME 展平。
+- EdgeOne 个人版大陆可用区**不拦境外访问**：境外 WebFetch 抓 sitemap 完整返回，Googlebot/GPTBot UA 均 200。国外搜索引擎与 AI 爬虫可达，海外 GEO 链路成立。
+- EdgeOne OpenAPI 刷新缓存用手写 TC3 签名报 SignatureFailure，官方 SDK（`scripts/purge_eo_sdk.py`）一次通过；`coscmd` 装在 `~/Library/Python/3.9/bin/`（不在 PATH，需全路径调用）。
+- OG 分享图：wordmark PNG 自带底色 #f7f3eb，背景必须同色才无缝；生成脚本 `scripts/make-og.mjs`（sharp + SVG 文字，中英文渲染正常）。
+
+### 工具链约定
+
+- 部署一句话流程：`npm run build` → `~/Library/Python/3.9/bin/coscmd upload -rs dist/ /` → `python3 scripts/purge_eo_sdk.py purge_all`（URL 级刷新需带斜杠变体）。
+- 百度推送：核心页 `node --env-file=.env scripts/baidu-push.mjs`；全量 `--all`（配额富余时）。
 
 ## 已整理的工作队列
 
