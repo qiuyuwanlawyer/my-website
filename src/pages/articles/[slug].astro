@@ -22,14 +22,13 @@ export function getStaticPaths() {
 }
 
 const { frontmatter, Content, previous, previousSlug, next, nextSlug } = Astro.props;
----
 
-<BaseLayout
-  title={`${frontmatter.title} | 邱煜完律师`}
-  description={frontmatter.summary}
-  pageSchema={{
+const articleSlug = `https://qiuyuwan.cn/articles/${Astro.params.slug}`;
+const faqItems = Array.isArray(frontmatter.faq) ? frontmatter.faq : [];
+const pageSchemas = [
+  {
     "@type": "Article",
-    "@id": `https://qiuyuwan.cn/articles/${Astro.params.slug}#article`,
+    "@id": `${articleSlug}#article`,
     headline: frontmatter.title,
     description: frontmatter.summary,
     datePublished: frontmatter.date,
@@ -38,8 +37,30 @@ const { frontmatter, Content, previous, previousSlug, next, nextSlug } = Astro.p
     articleSection: frontmatter.category,
     author: { "@id": "https://qiuyuwan.cn/#person", "@type": "Person", name: frontmatter.author },
     publisher: { "@id": "https://qiuyuwan.cn/#person" },
-    mainEntityOfPage: `https://qiuyuwan.cn/articles/${Astro.params.slug}`
-  }}
+    mainEntityOfPage: articleSlug
+  },
+  ...(faqItems.length > 0
+    ? [
+        {
+          "@type": "FAQPage",
+          "@id": `${articleSlug}#faq`,
+          mainEntity: faqItems.map((item) => ({
+            "@type": "Question",
+            name: item.q,
+            acceptedAnswer: { "@type": "Answer", text: item.a }
+          }))
+        }
+      ]
+    : [])
+];
+---
+
+<BaseLayout
+  title={`${frontmatter.title} | 邱煜完律师`}
+  description={frontmatter.summary}
+  pageSchema={pageSchemas}
+  ogType="article"
+  publishedTime={frontmatter.date}
 >
   <header class="article-detail-hero">
     <a href="/articles">← 返回文章列表</a>
@@ -55,6 +76,17 @@ const { frontmatter, Content, previous, previousSlug, next, nextSlug } = Astro.p
     </aside>
     <article class="article-body">
       <Content />
+      {faqItems.length > 0 && (
+        <section class="article-faq" aria-label="常见问题">
+          <h2>常见问题</h2>
+          {faqItems.map((item) => (
+            <div class="article-faq-item">
+              <h3>{item.q}</h3>
+              <p>{item.a}</p>
+            </div>
+          ))}
+        </section>
+      )}
       <footer class="article-disclaimer">
         <strong>声明</strong>
         <p>本文仅作一般性法律知识分享，不构成针对具体事项的法律意见。案件事实、证据和程序阶段不同，结论可能存在差异。</p>

@@ -28,6 +28,7 @@ export function GET() {
 ## 完整文章清单
 
 - [完整文章索引](https://qiuyuwan.cn/articles-index.txt)：自动生成的全部文章标题、日期、分类、摘要和原文链接。
+- [文章全文索引（llms-full）](https://qiuyuwan.cn/llms-full.txt)：全部文章的完整正文文本，构建时自动生成，适合 AI 系统一次性整体检索。
 - [XML 网站地图](https://qiuyuwan.cn/sitemap.xml)：网站全部可索引页面。
 `;
 
