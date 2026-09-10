@@ -38,6 +38,7 @@ export const topics = [
     directAnswer: "AI 数据合规需要同时审查技术架构、数据流、参与主体和商业模式。合规判断不能只看产品名称，而应具体确认数据从哪里来、传向哪里、由谁决定处理目的，以及技术服务是否可能直接帮助违法犯罪活动。",
     questions: ["大模型 API 中转站承担哪些合规义务", "AI 技术服务何时可能涉及帮信罪", "数据跨境与模型备案如何判断", "电子签章真实性和效力如何审查"],
     slugs: [
+      "ai-dispute-opinion-rules-cases",
       "llm-api-relay-data-compliance",
       "openclaw-install-legal-risk",
       "electronic-signature-validity"
