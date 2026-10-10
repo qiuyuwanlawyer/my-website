@@ -38,6 +38,8 @@
 - DNSPod `@` 主机 CNAME 与 TXT 可共存（加 TXT 弹冲突提醒，直接确定保存），实测 DNSPod/阿里/Google/Cloudflare 四大公共 DNS 均正常返回 TXT——无需开启 CNAME 展平。
 - EdgeOne 个人版大陆可用区**不拦境外访问**：境外 WebFetch 抓 sitemap 完整返回，Googlebot/GPTBot UA 均 200。国外搜索引擎与 AI 爬虫可达，海外 GEO 链路成立。
 - EdgeOne OpenAPI 刷新缓存用手写 TC3 签名报 SignatureFailure，官方 SDK（`scripts/purge_eo_sdk.py`）一次通过；`coscmd` 装在 `~/Library/Python/3.9/bin/`（不在 PATH，需全路径调用）。
+- EdgeOne 套餐到期 = 全站断链（2026-10-10 实证）：个人版套餐到期后先隔离（isolated）、加速 CNAME 停止下发 A 记录、站点 Paused；续费后约 4 分钟 DNS 自动恢复，站点配置（CNAME 接入、缓存规则）在隔离期保留、无需重配。**套餐必须开自动续费**（续费后默认仍 AutoRenewFlag=0，需在费用中心手动设）。腾讯云 SDK 只对系统 Python（/usr/bin/python3）安装，brew python3 无 tencentcloud 模块。
+- 费用中心「续费管理」列出的到期资源未必是网站依赖项：本站访问链路为 域名→EdgeOne→COS，不经过任何 CVM；早期 CVM（ins-242kj7oi）到期不影响网站，无需续费。排障顺序：DNS 解析→CDN 状态（TEO API DescribeZones 的 Paused/ActiveStatus）→源站直连。
 - OG 分享图：wordmark PNG 自带底色 #f7f3eb，背景必须同色才无缝；生成脚本 `scripts/make-og.mjs`（sharp + SVG 文字，中英文渲染正常）。
 
 ### 工具链约定

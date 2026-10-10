@@ -305,6 +305,7 @@
 | EdgeOne OpenAPI 手写 TC3 签名 SignatureFailure | 1 | 放弃手写签名，改官方 SDK（scripts/purge_eo_sdk.py）一次通过。 |
 | zsh source .env 解析失败（URL 含 &） | 1 | 改用 `node --env-file=.env`（Node ≥20.6）。 |
 | 百度验证「无法连接服务器」/ GSC sitemap「无法抓取」 | 各 1 | 均为平台侧瞬时/初始状态：百度重试即成；GSC 等待自动重抓（实测站内外可达、境外可达）。 |
+| EdgeOne 套餐到期全站断链（2026-10-10） | 1 | 套餐仅购 1 月且未开自动续费；用户续费后约 4 分钟 DNS 恢复，purge_all 清停机缓存。教训：先按访问链路定位故障再付款（费用中心的 CVM 与网站无关），套餐必开自动续费。 |
 
 ## 工作约定
 
