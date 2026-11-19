@@ -431,9 +431,9 @@ li {
   display: none;
 }
 
-/* Compact navigation fallback for embedded mobile browsers that report a
-   wider layout viewport than the physical screen. */
-@media (max-width: 900px) {
+/* Compact navigation fallback: the eight top-level entries need the full
+   desktop width, so collapse below this point rather than wrapping labels. */
+@media (max-width: 1120px) {
   .site-header {
     width: min(100% - 32px, 1320px);
   }

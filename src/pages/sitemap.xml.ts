@@ -1,7 +1,7 @@
 const articleModules = import.meta.glob("../content/articles/*.md", { eager: true });
 import { topics } from "../data/topics";
 
-const staticPaths = ["", "about", "products", "articles", "topics", "videos", "podcast", "handbook", ...topics.map((topic) => `topics/${topic.slug}`)];
+const staticPaths = ["", "about", "products", "articles", "topics", "videos", "podcast", "handbook", "whitepapers", "whitepapers/ai-litigation", "whitepapers/overseas-employment", ...topics.map((topic) => `topics/${topic.slug}`)];
 const buildDate = new Date().toISOString().slice(0, 10);
 
 function escapeXml(value: string) {

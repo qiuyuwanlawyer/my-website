@@ -1,0 +1,192 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import PublicationReader from "../../components/PublicationReader.astro";
+import { whitepapers } from "../../data/whitepapers";
+
+export function getStaticPaths() {
+  return whitepapers.map((paper) => ({ params: { slug: paper.slug }, props: { paper } }));
+}
+
+const { paper } = Astro.props;
+const pages = Array.from({ length: paper.pages }, (_, i) => i + 1);
+---
+<BaseLayout
+  title={`${paper.title} | 邱煜完律师`}
+  description={`${paper.title}（${paper.published}，${paper.pages} 页）在线阅读与下载。${paper.subtitle}。`}
+>
+  <section class="page-hero wp-hero">
+    <p class="eyebrow">{paper.eyebrow}</p>
+    <h1>{paper.title}</h1>
+    <p>{paper.subtitle}</p>
+    <div class="wp-meta">
+      <span>{paper.pages} 页 · 原版版面</span>
+      <span>{paper.published}</span>
+      <span>{paper.org}</span>
+    </div>
+    <div class="wp-actions">
+      <a class="button primary" href={paper.pdf} target="_blank" rel="noopener">下载 PDF →</a>
+      <a class="button ghost" href="/whitepapers">全部白皮书</a>
+    </div>
+  </section>
+
+  <PublicationReader slug={paper.slug} title={paper.title} total={paper.pages} pages={pages} />
+
+  <section class="section wp-detail">
+    <div class="wp-detail-grid">
+      <div class="wp-detail-copy">
+        <h2>关于本书</h2>
+        <p>{paper.description}</p>
+        <ul class="wp-highlights">
+          {paper.highlights.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div class="wp-toc">
+        <p class="eyebrow">CONTENTS</p>
+        <h2>目录</h2>
+        <ol>
+          {paper.toc.map((item) => (
+            <li>
+              <span>{item.no}</span>
+              <strong>{item.label}</strong>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <aside class="contact-band wp-contact" aria-label="微信咨询">
+    <div class="contact-band-copy">
+      <p class="eyebrow">CONTACT</p>
+      <h2>如需联系我们</h2>
+      <p>请简要说明主体、事件和当前阶段，我先帮你判断问题性质与紧迫程度。敏感材料可先做必要脱敏。</p>
+    </div>
+    <div class="qr-card">
+      <div class="qr-image">
+        <img src="/images/wechat-qr-navy.png" alt="邱煜完律师微信二维码" />
+      </div>
+      <div>
+        <strong>微信咨询</strong>
+        <span class="qr-desc">扫码添加，简要说明争议、税务或经营风险节点。</span>
+        <span class="wechat-id-row">
+          <span>微信号 <b>qiuyuwan580</b></span>
+          <button type="button" class="wechat-copy-btn" data-wechat="qiuyuwan580">复制微信号</button>
+        </span>
+      </div>
+    </div>
+  </aside>
+
+  <p class="wp-note">
+    本书由北京天驰君泰（杭州）律师事务所{paper.org}编制，本页为原版完整呈现；内容仅供参考，不构成针对具体事项的法律意见。
+  </p>
+</BaseLayout>
+
+<style>
+  .wp-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+    margin-top: 20px;
+    font-size: 14px;
+    color: var(--muted);
+  }
+
+  .wp-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  .wp-actions .button {
+    padding: 13px 26px;
+    font-weight: 900;
+  }
+
+  .wp-detail {
+    padding-bottom: 40px;
+  }
+
+  .wp-detail-grid {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: clamp(32px, 5vw, 72px);
+    align-items: start;
+  }
+
+  .wp-detail-copy h2,
+  .wp-toc h2 {
+    margin: 6px 0 16px;
+    font-size: clamp(26px, 3vw, 34px);
+  }
+
+  .wp-detail-copy p {
+    color: var(--text-soft);
+    line-height: 1.9;
+  }
+
+  .wp-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .wp-highlights li {
+    padding: 7px 14px;
+    border: 1px solid var(--dark-line);
+    font-size: 13px;
+    color: var(--deep-2);
+    background: rgba(31, 127, 165, 0.06);
+  }
+
+  .wp-toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--dark-line);
+  }
+
+  .wp-toc li {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 14px;
+    align-items: baseline;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--dark-line);
+  }
+
+  .wp-toc li span {
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: var(--gold-deep);
+  }
+
+  .wp-toc li strong {
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.55;
+  }
+
+  .wp-contact {
+    margin-bottom: 40px;
+  }
+
+  .wp-note {
+    width: min(1180px, calc(100% - 48px));
+    margin: 0 auto 72px;
+    font-size: 13px;
+    color: var(--text-soft);
+  }
+
+  @media (max-width: 760px) {
+    .wp-detail-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
