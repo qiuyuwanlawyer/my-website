@@ -1,5 +1,16 @@
 # 项目进度记录
 
+## 2026-11-19：EdgeOne 套餐二次到期断站——续费恢复（自动续费仍未开启）
+
+- **状态：** complete（遗留风险：AutoRenewFlag 依然为 0，12-19 将第三次到期）
+- **故障：** 全站无法访问。API 实测：`edgeone-3uif2a8u1x07` 个人版 **2026-11-10 13:59:59 到期**（10-10 续费时只买了 1 个月且未开自动续费），Status=`isolated`，站点 `Paused=True`；域名正常（2027-06）、COS 源站 200、数据完好。断点同 10-10：EO 调度域名 `qiuyuwan.cn.eo.dnse1.com` 不下发 A 记录。
+- **处置：** 用户控制台购买/续费个人版（新到期日 2026-12-19，Status 恢复 normal）→ 本次未自动恢复，站点仍 Paused，用 API `ModifyZoneStatus(Paused=False)` 手动启用 → 加速域名状态转 online → 权威 NS（ns2.qeodns.com）下发 A 记录 180.178.227.7 → purge_all（JobId `3xlszo4e4c2i`）→ 全站 7 个主路径 200。
+- **经验补充（对 10-10 条目的修正）：**
+  - 续费后**不一定会自动解除 Paused**，若 5 分钟仍无 DNS，先查 `DescribeZones` 的 Paused，用 `ModifyZoneStatus` 或控制台「启用」手动恢复；
+  - 判断 DNS 是否真下发，应直接查权威 NS（`dig @ns2.qeodns.com qiuyuwan.cn.eo.dnse1.com`），递归解析器可能有缓存延迟；
+  - 个人版 ¥8.71/月，两次断站均源于未开自动续费——**必须开启**。
+- **下一步（用户操作）：** 费用中心续费管理开启自动续费，否则 2026-12-19 再次断站。
+
 ## 2026-10-24：新增 AI 合规文章《涉人工智能诉讼案件全盘点（二）》
 
 - **状态：** complete
